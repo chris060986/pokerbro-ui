@@ -7,7 +7,7 @@ env:
 before_script:
   - docker login -u $DOCKER_USER -p $DOCKER_PASS
 
-scripts:
+script:
   - export IMAGE=chris060986/pokerbro-ui
   - docker build -t $IMAGE:$COMMIT .
   - docker run chris060986/pokerbro-ui npm run test -- --coverage
