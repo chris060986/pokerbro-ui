@@ -17,5 +17,4 @@ scripts:
   - docker images --all
 
 after_success:
-  - docker push $IMAGE:$COMMIT
   - docker push $IMAGE:$TAG
