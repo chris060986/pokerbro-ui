@@ -1,0 +1,21 @@
+services:
+  - docker
+
+env:
+  - COMMIT=${TRAVIS_COMMIT::8}
+
+before_script:
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+
+scripts:
+  - export IMAGE=chris060986/pokerbro-ui
+  - docker build -t $IMAGE:$COMMIT .
+  - docker run chris060986/pokerbro-ui npm run test -- --coverage
+  - export TAG=`grep -Po '\"version\":\s*"\K.*?(?=")' package.json`
+  - echo $TAG
+  - docker tag $IMAGE:$COMMIT $IMAGE:$TAG
+  - docker images --all
+
+after_success:
+  - docker push $IMAGE:$COMMIT
+  - docker push $IMAGE:$TAG
