@@ -9,15 +9,13 @@
   }
 
 .Header-icon{
-    height: 6vmin;
+    height: 100%;
     pointer-events: none;
     display: flex;
-    position: relative;
-    justify-content: left;
+    justify-content: center;
   }
 
 .Header-title{
-    height: 6vmin;
     display: flex;
 	align-items: center;
 	justify-content: center;
