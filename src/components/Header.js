@@ -1,9 +1,9 @@
-import logo from './logo.svg';
 import './Header.css'
+import * as DiIcons from 'react-icons/di';
 
 const Header = () => (
     <div className='App-header'>
-        <img className='Header-icon' src={logo} alt="logo" />
+        <DiIcons.DiReact className='Header-icon'></DiIcons.DiReact>
         <span className='Header-title'>
             The Poker Bro
         </span>
