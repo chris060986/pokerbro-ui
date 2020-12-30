@@ -1,16 +1,9 @@
 import React from 'react';
 import * as GiIcons from 'react-icons/gi';
 import * as CgIcons from 'react-icons/cg';
-import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
 
 export const SidebarData = [
-    {
-      title: 'Home',
-      path: '/',
-      icon: <AiIcons.AiFillHome className='nav-icon'/>,
-      cName: 'nav-item'
-    },
     {
         title: 'Profile',
         path: '/profile',
