@@ -1,7 +1,7 @@
 .App-header {
+    position: absolute;  
     background-color: #282c34;
-    min-height: 7vh;
-    height: 7vh;
+    height: 70px;
     width: 100%;
     display: flex;
     justify-content: left;
@@ -16,9 +16,9 @@
   }
 
 .Header-title{
-    display: flex;
+  display: flex;
 	align-items: center;
 	justify-content: center;
-    font-size: calc(10px + 2vmin);
+  font-size: 30px;
 }
 
