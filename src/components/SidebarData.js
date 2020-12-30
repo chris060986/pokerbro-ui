@@ -25,7 +25,7 @@ export const SidebarData = [
     {
       title: 'Support',
       path: '/support',
-      icon: <IoIcons.IoMdHelpCircle className='nav-icon bottom'/>,
-      cName: 'nav-item'
+      icon: <IoIcons.IoMdHelpCircle className='nav-icon'/>,
+      cName: 'nav-item bottom'
     }
   ];

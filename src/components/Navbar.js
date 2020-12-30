@@ -2,6 +2,7 @@ import React from 'react'
 import './Navbar.css'
 import { SidebarData } from "./SidebarData";
 import { IconContext } from 'react-icons';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => (
   <>
@@ -11,7 +12,9 @@ const Navbar = () => (
           {SidebarData.map((menuItem, index) => {
             return (
               <li key={index} className={menuItem.cName}>
-                {menuItem.icon}
+                <Link to={menuItem.path} className='nav-menu-bars'>
+                  {menuItem.icon}
+                </Link>
               </li>
             );
           })}
