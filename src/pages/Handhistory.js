@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import HandHistoryTable from '../components/handhistory/HandHistoryTable'
 
 class Handhistory extends React.Component {
 
@@ -25,16 +26,24 @@ class Handhistory extends React.Component {
   }
 
   render() {
+    //TODO: Handhistory table is not using state. Refactor that state update is recognized
     return (
       <div className='handhistory'>
         <h1>Handhistory</h1>
-        {this.state.num}
-        <p></p>
-        <ul>
-          {Object.entries(this.state.items).map(([key, value]) => (
-            <li>{key}</li>
-          ))}
-        </ul>
+        <span>HandHistoryTable has{this.state.num} items </span>
+        <HandHistoryTable items={this.state.items} />
+        <table>
+          <tbody>
+              {Object.values(this.state.items).map((value) => (
+                <tr key={value.doc.id}>
+                  <td>{value.doc.id}</td>
+                  <td>{value.doc.sb}</td>
+                  <td>{value.doc.winners}</td>
+                </tr>
+              ))}
+          </tbody>
+          
+        </table>
       </div>
     );
   }
