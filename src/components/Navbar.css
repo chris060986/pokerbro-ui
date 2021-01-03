@@ -12,6 +12,10 @@
   height: 100%;
 }
 
+.nav-container li:hover {
+  background-color: #4c5058;
+}
+
 .nav-menu-bars {
   display: flex;
 }
@@ -19,7 +23,9 @@
 .nav-item {
   justify-content: center;
   display: flex;
-  margin: 30px 0;
+  padding: 5px;
+  margin: 25px 0;
+  border-radius: 5px;
 }
 
 .nav-item.bottom{
@@ -27,8 +33,9 @@
   display: flex;
   justify-content: center;
   bottom: 10px;
-  margin-bottom: 20px;
-  margin-left: 10px;
+  padding: 5px;
+  margin-bottom: 15px;
+  margin-left: 5px;
 }
 
 .nav-icon {
