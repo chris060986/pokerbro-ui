@@ -25,25 +25,15 @@ class Handhistory extends React.Component {
     })
   }
 
+  handleChange(e) {
+
+  }
+
   render() {
     //TODO: Handhistory table is not using state. Refactor that state update is recognized
     return (
       <div className='handhistory'>
-        <h1>Handhistory</h1>
-        <span>HandHistoryTable has{this.state.num} items </span>
         <HandHistoryTable items={this.state.items} />
-        <table>
-          <tbody>
-              {Object.values(this.state.items).map((value) => (
-                <tr key={value.doc.id}>
-                  <td>{value.doc.id}</td>
-                  <td>{value.doc.sb}</td>
-                  <td>{value.doc.winners}</td>
-                </tr>
-              ))}
-          </tbody>
-          
-        </table>
       </div>
     );
   }
