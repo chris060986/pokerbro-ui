@@ -1,5 +1,4 @@
 import React from 'react'
-
 import './HandHistoryTable.css'
 
 class HandHistoryTable extends React.Component {
@@ -29,7 +28,15 @@ class HandHistoryTable extends React.Component {
             {Object.values(this.props.items).map((value) => (
               <tr key={value.doc.id}>
                 <td>{value.doc.id}</td>
-                <td>{value.doc.timestamp}</td>
+                <td>
+                  {Intl.DateTimeFormat('de', 
+                  { year: 'numeric',
+                    month: 'numeric',
+                    day: 'numeric', 
+                    hour: 'numeric',
+                    minute: 'numeric' 
+                  }).format(new Date(value.doc.timestamp))}
+                </td>
                 <td>{value.doc.sb}/{value.doc.bb}</td>
                 <td>Ah Kd</td>
                 <td>2h 7c Td</td>
