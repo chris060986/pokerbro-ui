@@ -17,29 +17,33 @@ class HandHistoryTable extends React.Component {
         starthand.push(card)
       ))
     ))
-    console.log(starthand)
     return starthand
+  }
+
+  position(doc){
+    //TODO: calculate position
+    return "UTG"
   }
 
   flopcards(doc){
     if(doc.flop){
       return Object.values(doc.flop.cards)
     } 
-    return null
+    return []
   }
 
   turncard(doc){
     if(doc.turn){
       return [doc.turn.cards[3]]
     }
-    return null
+    return []
   }
 
   rivercard(doc){
     if(doc.river){
       return [doc.river.cards[4]]
     }
-    return null
+    return []
   }
 
   render(){
@@ -51,6 +55,7 @@ class HandHistoryTable extends React.Component {
             <td>Time</td>
             <td>Stake</td>
             <td>Cards</td>
+            <td>Position</td>
             <td>Flop</td>
             <td>Turn</td>
             <td>River</td>
@@ -75,7 +80,10 @@ class HandHistoryTable extends React.Component {
               </td>
               <td>{value.doc.sb}/{value.doc.bb}</td>
               <td><Cards cards={this.startingHand(value.doc)}/></td>
-              
+              <td>{this.position(value.doc)}</td>
+              <td><Cards cards={this.flopcards(value.doc)}/></td>
+              <td><Cards cards={this.turncard(value.doc)}/></td>
+              <td><Cards cards={this.rivercard(value.doc)}/></td>
               <td>{value.doc.earnings}</td>
               <td>{this.earningsInBB(value.doc.earnings, value.doc.bb)}</td>
               <td>{value.doc.winners}</td>
