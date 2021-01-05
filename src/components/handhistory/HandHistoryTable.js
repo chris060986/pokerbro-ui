@@ -39,10 +39,10 @@ class HandHistoryTable extends React.Component {
                 }).format(new Date(value.doc.timestamp))}
               </td>
               <td>{value.doc.sb}/{value.doc.bb}</td>
-              <td>Ah Kd</td>
-              <td>2h 7c Td</td>
-              <td>3h</td>
+              <td>AhKh</td>
+              <td><Cards cards={value.doc.flop}/></td>
               <td><Cards cards={value.doc.turn}/></td>
+              <td><Cards cards={value.doc.river}/></td>
               <td>{value.doc.earnings}</td>
               <td>{this.earningsInBB(value.doc.earnings, value.doc.bb)}</td>
               <td>{value.doc.winners}</td>

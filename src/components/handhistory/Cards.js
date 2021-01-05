@@ -1,13 +1,11 @@
 import React from 'react'
+import CardIcon from '../cards/CardIcon'
 
 class Cards extends React.Component{
 
     constructor(props){
         super(props)
         const hasStreet = props.cards ? true : false
-        if(hasStreet){
-            console.log(props.cards.cards)
-        }
         this.state = { hasStreet: hasStreet}
     }
 
@@ -15,8 +13,8 @@ class Cards extends React.Component{
         if(this.state.hasStreet){
             return (
             <div>
-                {Object.values(this.props.cards.cards).map(card =>(
-                    <span>{card.rank}{card.suit}</span>
+                {Object.entries(this.props.cards.cards).map(([entry, card]) =>(
+                    <CardIcon key={entry} suit={card.suit} rank={card.rank}/>
                 ))}
             </div>
             )
