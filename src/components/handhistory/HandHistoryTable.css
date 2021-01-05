@@ -1,4 +1,29 @@
 .HandHistoryTable{
     color: white;
-    font-size: 0.7em;
+    font-size: 0.5em;
+}
+
+.card-icon{
+  height: 2em;
+  width: 2em;
+}
+
+.card-icon-wrapper{
+    display: inline-block;
+}
+
+.spades{
+    color: rgb(234, 228, 240);
+}
+
+.hearts{
+    color: salmon;
+}
+
+.diamonds {
+    color: deepskyblue;
+}
+
+.clubs {
+    color: rgb(30, 170, 30);
 }

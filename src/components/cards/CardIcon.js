@@ -3,17 +3,18 @@ import { CardIcons } from './CardIconData'
 
 class CardIcon extends React.Component {
 
+    constructor(props){
+        super(props)
+        console.log(props.suit)
+        console.log(props.rank)
+    }
+
     getCardIconData(suit, rank) {
-        // How to do?
-        //console.log(CardIcons[suit][rank])
-        //return CardIcons[suit][rank]
-        console.log(rank)
-        console.log()
-        return CardIcons[suit][rank]
+          return CardIcons[suit][rank]
       }
 
     render(){
-        return (<div>{this.getCardIconData(this.props.suit, this.props.rank)}</div>)
+        return (<div className="card-icon-wrapper">{this.getCardIconData(this.props.suit, this.props.rank)}</div>)
     }
 }
 

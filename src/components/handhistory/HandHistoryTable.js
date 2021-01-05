@@ -1,11 +1,45 @@
 import React from 'react'
 import './HandHistoryTable.css'
 import Cards from './Cards'
+import * as CgIcons from 'react-icons/cg';
 
 class HandHistoryTable extends React.Component {
 
   earningsInBB(earnings, bb){
     return (earnings/bb).toFixed(1);
+  }
+
+  startingHand(doc){
+    const hero = doc.hero
+    let starthand = []
+    Object.values(doc.players).filter(value => value.name===hero).map((player) => (
+      Object.values(player.hand).map(card => (
+        starthand.push(card)
+      ))
+    ))
+    console.log(starthand)
+    return starthand
+  }
+
+  flopcards(doc){
+    if(doc.flop){
+      return Object.values(doc.flop.cards)
+    } 
+    return null
+  }
+
+  turncard(doc){
+    if(doc.turn){
+      return [doc.turn.cards[3]]
+    }
+    return null
+  }
+
+  rivercard(doc){
+    if(doc.river){
+      return [doc.river.cards[4]]
+    }
+    return null
   }
 
   render(){
@@ -23,6 +57,7 @@ class HandHistoryTable extends React.Component {
             <td>net won ($)</td>
             <td>net won (BB)</td>
             <td>Winner</td>
+            <td>Replay</td>
           </tr>
         </thead>
         <tbody>
@@ -39,13 +74,12 @@ class HandHistoryTable extends React.Component {
                 }).format(new Date(value.doc.timestamp))}
               </td>
               <td>{value.doc.sb}/{value.doc.bb}</td>
-              <td>AhKh</td>
-              <td><Cards cards={value.doc.flop}/></td>
-              <td><Cards cards={value.doc.turn}/></td>
-              <td><Cards cards={value.doc.river}/></td>
+              <td><Cards cards={this.startingHand(value.doc)}/></td>
+              
               <td>{value.doc.earnings}</td>
               <td>{this.earningsInBB(value.doc.earnings, value.doc.bb)}</td>
               <td>{value.doc.winners}</td>
+              <td><CgIcons.CgPlayButtonO /></td>
           </tr>
           ))}
         </tbody>
