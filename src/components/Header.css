@@ -1,0 +1,28 @@
+.App-header {
+    position: absolute;  
+    background-color: #282c34;
+    height: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    color: #61DAFB;
+  }
+
+
+
+.Header-icon {
+    height: 70px;
+    width: 70px;
+    pointer-events: none;
+    display: flex;
+    justify-content: left;
+  }
+
+.Header-title{
+  display: flex;
+	align-items: center;
+	justify-content: center;
+  font-size: 30px;
+  padding-left: 10px;
+}
+

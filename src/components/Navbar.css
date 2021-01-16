@@ -1,0 +1,43 @@
+.Navbar {
+  background-color: #282c34;
+  margin-top: 70px;
+  padding: 5px;
+  width: 70px;
+}
+
+.nav-container {
+  justify-content: center;
+  list-style: none;
+  height: 100%;
+}
+
+.nav-container li:hover {
+  background-color: #4c5058;
+}
+
+.nav-menu-bars {
+  display: flex;
+}
+
+.nav-item {
+  justify-content: center;
+  display: flex;
+  padding: 5px;
+  margin: 25px 0;
+  border-radius: 5px;
+}
+
+.nav-item.bottom{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  bottom: 10px;
+  padding: 5px;
+  margin-bottom: 15px;
+  margin-left: 5px;
+}
+
+.nav-icon {
+  width: 40px;
+  height: 40px;
+}
