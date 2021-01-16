@@ -71,7 +71,7 @@ class HandHistoryTable extends React.Component {
               <td>{value.doc.id}</td>
               <td>
                 {Intl.DateTimeFormat('de', 
-                { year: 'numeric',
+                { 
                   month: 'numeric',
                   day: 'numeric', 
                   hour: 'numeric',
