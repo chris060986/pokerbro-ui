@@ -25,10 +25,6 @@ class Handhistory extends React.Component {
     })
   }
 
-  handleChange(e) {
-
-  }
-
   render() {
     //TODO: Handhistory table is not using state. Refactor that state update is recognized
     return (
