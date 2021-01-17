@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import HandHistoryTable from '../components/handhistory/HandHistoryTable'
+import HandHistoryDiagram from '../components/handhistory/HandHistoryDiagram'
 
 class Handhistory extends React.Component {
 
@@ -11,6 +12,17 @@ class Handhistory extends React.Component {
       items: [],
       num: 0
     }
+  }
+
+  createDiagramData() {
+    var lastEarnings = parseFloat(0);
+    return Object.values(this.state.items).reduce(function(map, value) {
+      var earnings = parseFloat(value.doc.earnings)
+      earnings = lastEarnings + earnings
+      lastEarnings = earnings
+      map[value.doc.timestamp] = earnings;
+      return map;
+     }, {});
   }
 
   componentDidMount() {
@@ -26,9 +38,9 @@ class Handhistory extends React.Component {
   }
 
   render() {
-    //TODO: Handhistory table is not using state. Refactor that state update is recognized
     return (
       <div className='handhistory'>
+        <HandHistoryDiagram data={this.createDiagramData()} />
         <HandHistoryTable items={this.state.items} />
       </div>
     );

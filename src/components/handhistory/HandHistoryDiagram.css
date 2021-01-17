@@ -1,0 +1,6 @@
+.graph-div {
+    position: relative;
+    min-width: 100%;
+    min-height: 50px;
+    border: 1px solid white;
+  }
