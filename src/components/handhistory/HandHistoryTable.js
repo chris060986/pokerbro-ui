@@ -21,7 +21,22 @@ class HandHistoryTable extends React.Component {
   }
 
   position(doc){
-    //TODO: calculate position
+    //const hero = doc.hero
+    //const button = doc.button
+    //let buttonNumber = -1
+    //let heroNumber = -1
+    //if(hero===button){
+    //  return 'Button'
+    //}
+    //const maxPlayers = doc['max-players']
+    ////console.log(maxPlayers)
+    //Object.values(doc.players).map((player) => (
+    //  buttonNumber = player===button ? player.seat : buttonNumber
+    //))
+    //Object.values(doc.players).map((player) => (
+    //  heroNumber = player===hero ? player.seat : heroNumber
+    //))
+    ////console.log(buttonNumber)
     return "UTG"
   }
 
