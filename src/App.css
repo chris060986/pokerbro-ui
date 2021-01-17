@@ -19,7 +19,7 @@
 .villain {
   background-color: #4c5058;
   margin-top: 70px;
-  display: flex;
+  display: block;
   align-items: center;
   justify-content: center;
   font-size: 2rem;
