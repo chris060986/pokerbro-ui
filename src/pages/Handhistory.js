@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import HandHistoryTable from '../components/handhistory/HandHistoryTable'
 import HandHistoryDiagram from '../components/handhistory/HandHistoryDiagram'
+import HandHistoryDatePicker from '../components/handhistory/HandHistoryDatePicker'
 
 class Handhistory extends React.Component {
 
@@ -40,6 +41,7 @@ class Handhistory extends React.Component {
   render() {
     return (
       <div className='handhistory'>
+        <HandHistoryDatePicker />
         <HandHistoryDiagram data={this.createDiagramData()} />
         <HandHistoryTable items={this.state.items} />
       </div>
