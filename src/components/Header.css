@@ -1,14 +1,12 @@
 .App-header {
     position: absolute;  
-    background-color: #282c34;
+    background-color: #2e2e2d;
     height: 70px;
     width: 100%;
     display: flex;
     justify-content: left;
-    color: #61DAFB;
+    color: #f86100;
   }
-
-
 
 .Header-icon {
     height: 70px;

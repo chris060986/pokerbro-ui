@@ -1,7 +1,8 @@
 import React from 'react'
 import './HandHistoryTable.css'
 import Cards from './Cards'
-import * as CgIcons from 'react-icons/cg';
+import * as AiIcons from 'react-icons/ai';
+import { IconContext } from 'react-icons';
 
 class HandHistoryTable extends React.Component {
 
@@ -63,6 +64,8 @@ class HandHistoryTable extends React.Component {
 
   render(){
       return (
+        <>
+        
       <table className='HandHistoryTable'>
         <thead>
           <tr> 
@@ -102,11 +105,15 @@ class HandHistoryTable extends React.Component {
               <td>{value.doc.earnings}</td>
               <td>{this.earningsInBB(value.doc.earnings, value.doc.bb)}</td>
               <td>{value.doc.winners}</td>
-              <td><CgIcons.CgPlayButtonO /></td>
+              <IconContext.Provider value={{ color: '#f86100' }}>
+              <td><AiIcons.AiFillPlayCircle /></td>
+              </IconContext.Provider>
           </tr>
           ))}
         </tbody>
       </table>
+      
+          </>
       )
   }
 }

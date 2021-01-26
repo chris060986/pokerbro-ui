@@ -8,19 +8,21 @@
 }
 
 .App {
-  background-color: #4c5058;
+  background-color: #575756;
   min-height: 100vh;
   display: flex;
-  color: white;
+  color: black;
 }
 
 .profile,
 .handhistory,
 .villain {
-  background-color: #4c5058;
+  background-color: #575756;
   margin-top: 70px;
   display: block;
   align-items: center;
   justify-content: center;
   font-size: 2rem;
+  padding: 16px;
+  list-style: none;
 }

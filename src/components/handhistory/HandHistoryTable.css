@@ -13,17 +13,17 @@
 }
 
 .spades{
-    color: rgb(234, 228, 240);
+    color: #FAEBD7;
 }
 
 .hearts{
-    color: salmon;
+    color: #FA8072;
 }
 
 .diamonds {
-    color: deepskyblue;
+    color: #1CA9C9;
 }
 
 .clubs {
-    color: rgb(30, 170, 30);
+    color: #00A550;
 }

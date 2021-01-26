@@ -1,8 +1,9 @@
 .Navbar {
-  background-color: #282c34;
+  background-color: #575756;
   margin-top: 70px;
   padding: 5px;
   width: 70px;
+  border-right: rgba(46, 46, 45, 0.5) 1px solid;
 }
 
 .nav-container {
@@ -12,7 +13,7 @@
 }
 
 .nav-container li:hover {
-  background-color: #4c5058;
+  background-color: #2e2e2d;
 }
 
 .nav-menu-bars {

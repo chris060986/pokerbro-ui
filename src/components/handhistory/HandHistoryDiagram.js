@@ -8,7 +8,7 @@ class HandHistoryDiagram extends React.Component{
     render () {
       return (
         <div className='graph-div'>
-          <LineChart curve={false} messages={{empty: "No data"}} data={this.props.data} />
+          <LineChart curve={false} messages={{empty: "No data"}} colors={["#f86100"]} data={this.props.data} />
         </div>
       ) 
     }

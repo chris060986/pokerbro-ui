@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => (
   <>
-    <IconContext.Provider value={{ color: '#61DAFB' }}>
+    <IconContext.Provider value={{ color: '#f86100' }}>
       <div className="Navbar">
         <ul className='nav-container'>
           {SidebarData.map((menuItem, index) => {
