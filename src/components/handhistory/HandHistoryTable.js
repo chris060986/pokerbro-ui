@@ -3,6 +3,7 @@ import './HandHistoryTable.css'
 import Cards from './Cards'
 import * as AiIcons from 'react-icons/ai';
 import { IconContext } from 'react-icons';
+import IconButton from '@material-ui/core/IconButton';
 
 class HandHistoryTable extends React.Component {
 
@@ -106,7 +107,11 @@ class HandHistoryTable extends React.Component {
               <td>{this.earningsInBB(value.doc.earnings, value.doc.bb)}</td>
               <td>{value.doc.winners}</td>
               <IconContext.Provider value={{ color: '#f86100' }}>
-              <td><AiIcons.AiFillPlayCircle /></td>
+              <td>
+              <IconButton aria-label="Replay" color="primary">
+                <AiIcons.AiFillPlayCircle />
+              </IconButton>
+              </td>
               </IconContext.Provider>
           </tr>
           ))}
