@@ -8,10 +8,11 @@ import { makeStyles } from '@material-ui/core/styles';
 const appBarStyle = makeStyles((theme) => ({
     header: {
         backgroundColor: theme.palette.secondary.dark,
+        zIndex: theme.zIndex.drawer + 1,
     },
     icon: {
-        height: "72px",
-        width: "72px",
+        height: "64px",
+        width: "64px",
         color: theme.palette.primary.main,
     }
   }));
@@ -21,7 +22,7 @@ function Header() {
     const classes = appBarStyle()
     return (
       <>
-        <AppBar className={classes.header} position="static">
+        <AppBar className={classes.header} position="fixed">
           <Toolbar>
             <DiIcons.DiReact className={classes.icon}></DiIcons.DiReact>
             <TypoGraphy variant="h4" component="h1" color="primary" >The Poker Bro</TypoGraphy>

@@ -17,6 +17,13 @@ const theme = createMuiTheme({
       default: '#b4b4b1',
     },
   },
+  overrides: {
+    MuiDrawer: {
+        paper: {
+            //theme.
+            backgroundColor: "#b4b4b1",
+    }},
+  }
 });
 
 export default theme;

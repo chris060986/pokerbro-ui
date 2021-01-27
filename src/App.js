@@ -4,36 +4,22 @@ import Navbar from "./components/Navbar";
 import Profile from "./pages/Profile";
 import Handhistory from './pages/Handhistory';
 import Villains from './pages/Villains';
-
-function Old() {
-  return (
-    <>
-      <Router>
-      <div className="App">
-        <Header></Header>
-        <Navbar></Navbar>
-        <Switch>
-          <Route path='/' exact component={Profile}/>
-          <Route path='/profile' component={Profile}/>
-          <Route path='/handhistory' component={Handhistory}/>
-          <Route path='/villains' component={Villains}/>
-        </Switch>
-      </div>
-      </Router>
-    </>
-  );
-}
-
+import Box from '@material-ui/core/Box';
 
 function App() {
   return (
     <>
       <Router>
-        <Header></Header>
+        <Header />
+        <Navbar />
+        <Box style={{ marginLeft: "70px", padding: "10px", display: "inline-block"}}>
           <Switch>
             <Route path='/' exact component={Profile}/>
             <Route path='/profile' component={Profile}/>
+            <Route path='/handhistory' component={Handhistory}/>
+            <Route path='/villains' component={Villains}/>
           </Switch>
+        </Box>
       </Router>
     </>
   );

@@ -1,9 +1,10 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import { Container } from '@material-ui/core';
 
 function Profile() {
   return (
-    <div className='profile'>
+    <Container>
       <h1>Profile</h1><br/>
       <span>Enter your username:</span>
       <ul>
@@ -23,7 +24,7 @@ function Profile() {
       <Button variant="contained" color="primary" href="#contained-buttons">
         Link
       </Button>
-    </div>    
+    </Container>    
   );
 }
 
