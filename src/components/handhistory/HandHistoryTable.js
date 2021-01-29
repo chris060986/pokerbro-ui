@@ -86,8 +86,8 @@ class HandHistoryTable extends React.Component {
         </thead>
         <tbody>
           {Object.values(this.props.items).map((value) => (
-            <tr key={value.doc.id}>
-              <td>{value.doc.id}</td>
+            <tr key={value.id}>
+              <td>{value.id}</td>
               <td>
                 {Intl.DateTimeFormat('de', 
                 { 
@@ -95,17 +95,17 @@ class HandHistoryTable extends React.Component {
                   day: 'numeric', 
                   hour: 'numeric',
                   minute: 'numeric' 
-                }).format(new Date(value.doc.timestamp))}
+                }).format(new Date(value.timestamp))}
               </td>
-              <td>{value.doc.sb}/{value.doc.bb}</td>
-              <td><Cards cards={this.startingHand(value.doc)}/></td>
+              <td>{value.sb}/{value.bb}</td>
+              <td><Cards cards={this.startingHand(value)}/></td>
               <td>{this.position(value.doc)}</td>
-              <td><Cards cards={this.flopcards(value.doc)}/></td>
-              <td><Cards cards={this.turncard(value.doc)}/></td>
-              <td><Cards cards={this.rivercard(value.doc)}/></td>
-              <td>{value.doc.earnings}</td>
-              <td>{this.earningsInBB(value.doc.earnings, value.doc.bb)}</td>
-              <td>{value.doc.winners}</td>
+              <td><Cards cards={this.flopcards(value)}/></td>
+              <td><Cards cards={this.turncard(value)}/></td>
+              <td><Cards cards={this.rivercard(value)}/></td>
+              <td>{value.earnings}</td>
+              <td>{this.earningsInBB(value.earnings, value.bb)}</td>
+              <td>{value.winners}</td>
               <IconContext.Provider value={{ color: '#f86100' }}>
               <td>
               <IconButton aria-label="Replay" color="primary">
