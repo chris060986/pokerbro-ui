@@ -35,7 +35,7 @@ import { Link } from "react-router-dom";
                 return (
                   <>
                   <ListItem key={index} className={classes.menuListItem} component={Link} to={menuItem.path}>
-                    <IconButton color="primary" size="large" aria-label="upload picture" component="span">
+                    <IconButton color="primary" aria-label={menuItem.titel} component="span">
                       {menuItem.icon}
                     </IconButton>
                     </ListItem>
