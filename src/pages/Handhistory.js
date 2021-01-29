@@ -46,6 +46,7 @@ class Handhistory extends React.Component {
   render() {
     return (
       <Container>
+        <h1>Handhistory</h1><br/>
         <HandHistoryDatePicker />
         <HandHistoryDiagram data={this.createDiagramData()} />
         <HandHistoryTable items={this.state.items} />
