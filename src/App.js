@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Profile from "./pages/Profile";
 import Handhistory from './pages/Handhistory';
 import Villains from './pages/Villains';
+import Support from './pages/Support';
 import Box from '@material-ui/core/Box';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path='/profile' component={Profile}/>
             <Route path='/handhistory' component={Handhistory}/>
             <Route path='/villains' component={Villains}/>
+            <Route path='/support' component={Support}/>
           </Switch>
         </Box>
       </Router>

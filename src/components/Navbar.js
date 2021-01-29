@@ -1,17 +1,12 @@
 import React from 'react'
 import { SidebarData } from "./SidebarData";
 import { IconContext } from 'react-icons';
-import { Link } from 'react-router-dom';
 import List from '@material-ui/core/List';
-import { Drawer, ListItem, ListItemIcon, makeStyles } from '@material-ui/core';
+import { Drawer, ListItem, makeStyles } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import { Link } from "react-router-dom";
 
   const navRailStyle = makeStyles((theme) => ({
-    navbar: {
-        backgroundColor: "green"
-    },
-    listItem: {
-        alignItems: 'center'
-    },
     toolbar: {
       display: 'flex',
       alignItems: 'center',
@@ -26,22 +21,20 @@ import { Drawer, ListItem, ListItemIcon, makeStyles } from '@material-ui/core';
     const classes = navRailStyle();
     return (
       <>
-        <IconContext.Provider value={{ color: '#f86100', size: "35px" }}>
+        <IconContext.Provider value={{ color: '#f86100' }}>
         <div className={classes.toolbar}>
         </div>
           <Drawer variant="permanent">
-           <div className={classes.toolbar} />
+            <div className={classes.toolbar} />
             <List>
               {SidebarData.map((menuItem, index) => {
                 return (
                   <>
-                  <ListItem key={index}>
-                    <ListItemIcon className={classes.listItem}>
-                      <Link to={menuItem.path} className='nav-menu-bars'>
-                        {menuItem.icon}
-                      </Link>
-                    </ListItemIcon>
-                  </ListItem>
+                  <ListItem key={index} component={Link} to={menuItem.path}>
+                    <IconButton color="primary" size="large" aria-label="upload picture" component="span">
+                      {menuItem.icon}
+                    </IconButton>
+                    </ListItem>
                   </>
                 );
               })}

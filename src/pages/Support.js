@@ -1,12 +1,12 @@
 import { Container } from '@material-ui/core';
 import React from 'react';
 
-function Villain() {
+function Support() {
   return (
     <Container>
-      <h1>Villains</h1>
+      <h1>Support</h1>
     </Container>
   );
 }
 
-export default Villain;
+export default Support;
