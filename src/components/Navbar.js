@@ -15,6 +15,10 @@ import { Link } from "react-router-dom";
       // necessary for content to be below app bar
       ...theme.mixins.toolbar,
     },
+    menuListItem: {
+      paddingRight: "8px",
+      paddingLeft: "8px"
+    }
   }));
 
   function Navbar() {
@@ -30,7 +34,7 @@ import { Link } from "react-router-dom";
               {SidebarData.map((menuItem, index) => {
                 return (
                   <>
-                  <ListItem key={index} component={Link} to={menuItem.path}>
+                  <ListItem key={index} className={classes.menuListItem} component={Link} to={menuItem.path}>
                     <IconButton color="primary" size="large" aria-label="upload picture" component="span">
                       {menuItem.icon}
                     </IconButton>
