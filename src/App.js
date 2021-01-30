@@ -13,9 +13,9 @@ function App() {
       <Router>
         <Header />
         <Navbar />
-        <Box style={{ marginLeft: "70px", padding: "10px", display: "inline-block"}}>
+        <Box style={{ marginLeft: "70px", padding: "10px"}}>
           <Switch>
-            <Route path='/' exact component={Profile}/>
+            <Route path='/' exact component={Profile} />
             <Route path='/profile' component={Profile}/>
             <Route path='/handhistory' component={Handhistory}/>
             <Route path='/villains' component={Villains}/>

@@ -3,7 +3,7 @@ import axios from 'axios';
 import HandHistoryTable from '../components/handhistory/HandHistoryTable'
 import HandHistoryDiagram from '../components/handhistory/HandHistoryDiagram'
 import HandHistoryDatePicker from '../components/handhistory/HandHistoryDatePicker'
-import { Container } from '@material-ui/core';
+import { Box, Container, Toolbar } from '@material-ui/core';
 
 class Handhistory extends React.Component {
 
@@ -11,8 +11,11 @@ class Handhistory extends React.Component {
     super(props)
     this.state = {
       isLoaded: false,
-      items: []
+      items: [],
+      startDate: new Date().setDate(new Date().getDate()-1),
+      endDate: new Date(),
     }
+    this.dateHandler = this.dateHandler.bind(this)
   }
 
   createDiagramData() {
@@ -43,14 +46,31 @@ class Handhistory extends React.Component {
     })
   }
 
+  dateHandler(newStartDate, newEndDate){
+    console.log(newStartDate)
+    console.log(newEndDate)
+    if(newStartDate!=null){
+      this.setState({
+        startDate: new Date(newStartDate)
+      });
+    }
+    if(newEndDate!=null){
+      this.setState({
+        endDate: new Date(newEndDate)
+      });
+    }
+  }
+
   render() {
     return (
-      <Container>
+      <div style={{with: "100%"}}>
+      <Box >
+        <Toolbar style={{ float: "right"}}><HandHistoryDatePicker startDate={this.state.startDate} endDate={this.state.endDate} changeHandler={this.dateHandler}/></Toolbar>
         <h1>Handhistory</h1><br/>
-        <HandHistoryDatePicker />
         <HandHistoryDiagram data={this.createDiagramData()} />
         <HandHistoryTable items={this.state.items} />
-      </Container>
+      </Box>
+      </div>
     );
   }
 

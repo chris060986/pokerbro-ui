@@ -1,6 +1,9 @@
 .graph-div {
-    position: relative;
-    min-width: 100%;
-    min-height: 50px;
-    
+    height: 500px;
+    max-width: 1000px;
+    background-color: '#848482';
+  }
+
+  .chartjs-render-monitor {
+    background-color: "black"
   }
