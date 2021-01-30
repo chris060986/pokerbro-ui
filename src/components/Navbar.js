@@ -26,15 +26,14 @@ import { Link } from "react-router-dom";
     return (
       <>
         <IconContext.Provider value={{ color: '#f86100' }}>
-        <div className={classes.toolbar}>
-        </div>
+        <div className={classes.toolbar} />
           <Drawer variant="permanent">
             <div className={classes.toolbar} />
             <List>
-              {SidebarData.map((menuItem, index) => {
+              {SidebarData.map((menuItem) => {
                 return (
                   <>
-                  <ListItem key={index} className={classes.menuListItem} component={Link} to={menuItem.path}>
+                  <ListItem key={menuItem.title} className={classes.menuListItem} component={Link} to={menuItem.path}>
                     <IconButton color="primary" aria-label={menuItem.titel} component="span">
                       {menuItem.icon}
                     </IconButton>
