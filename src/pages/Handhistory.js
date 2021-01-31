@@ -3,7 +3,7 @@ import axios from 'axios';
 import HandHistoryTable from '../components/handhistory/HandHistoryTable'
 import HandHistoryDiagram from '../components/handhistory/HandHistoryDiagram'
 import HandHistoryDatePicker from '../components/handhistory/HandHistoryDatePicker'
-import { Box, Container, Toolbar } from '@material-ui/core';
+import { Box, Toolbar } from '@material-ui/core';
 
 class Handhistory extends React.Component {
 
@@ -47,6 +47,7 @@ class Handhistory extends React.Component {
   }
 
   dateHandler(newStartDate, newEndDate){
+    console.log("toplevel handler")
     console.log(newStartDate)
     console.log(newEndDate)
     if(newStartDate!=null){

@@ -4,16 +4,18 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 
-
-export default function DateRangePicker() {
+const DateRangePicker = (props) => {
     const [startDate, setStartDate] = useState(new Date().setDate(new Date().getDate()-1));
     const [endDate, setEndDate] = useState(new Date());
     const onChange = dates => {
+      console.log("on change")
       const [start, end] = dates;
       setStartDate(start);
       setEndDate(end);
+      console.log(start)
+      console.log(end)
+      props.handler(start, end)
     };
-    const handleCalendarClose = () => console.log("Calendar closed");
     
     return (
         <>
@@ -26,7 +28,7 @@ export default function DateRangePicker() {
                 endDate={endDate}
                 selectsRange
                 inline
-                onCalendarClose={handleCalendarClose}
+                shouldCloseOnSelect={false}
             >
                 <Box>
                     <Button size="small" variant="contained" color="primary" style={{ float: "right"}}>OK</Button>
@@ -36,3 +38,5 @@ export default function DateRangePicker() {
         </>
     )
 };
+
+export default DateRangePicker;

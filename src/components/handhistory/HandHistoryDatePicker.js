@@ -11,6 +11,7 @@ class HandHistoryDatePicker extends React.Component {
     this.state = {
       calenderVisible: false,
     }
+    this.handler = this.handler.bind(this)
   }
 
   getLabel(){
@@ -27,11 +28,21 @@ class HandHistoryDatePicker extends React.Component {
     }).format(this.props.endDate);
   }
 
+  handler(newStartDate, newEndDate){
+    console.log("handler1")
+    if(newStartDate!=null && newEndDate!=null){
+      this.setState({
+        calenderVisible: false,
+      })
+      this.props.changeHandler(newStartDate, newEndDate)
+    }
+  }
+
   render() {
-    const { calenderVisible }= this.state;
+    const { calenderVisible } = this.state;
     return (
       <>
-      <div className="date-range-component-div" style={{ float: "right"}}>
+      <div className="date-range-component-div" style={{ float: "right", minWidth: "250px", minHeight: "500px", marginRight: "20px"}}>
         <TextField
           id="input-with-icon-textfield"
           size="small"
@@ -40,15 +51,15 @@ class HandHistoryDatePicker extends React.Component {
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                <IconButton color="secondary-dark" >
-                  <BsIcons.BsCalendar  />
+                <IconButton >
+                  <BsIcons.BsCalendar />
                 </IconButton>
               </InputAdornment>
             ),
           }}
         />
-        <div>
-        { calenderVisible ? <DateRangePicker  /> : null } 
+        <div hidden={!calenderVisible}>
+          <DateRangePicker handler={this.handler} /> 
         </div>
       </div>
       </>
