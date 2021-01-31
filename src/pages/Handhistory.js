@@ -12,7 +12,7 @@ class Handhistory extends React.Component {
     this.state = {
       isLoaded: false,
       items: [],
-      startDate: new Date().setDate(new Date().getDate()-1),
+      startDate: new Date().setDate(new Date(new Date().getDate()-75)),
       endDate: new Date(),
     }
     this.dateHandler = this.dateHandler.bind(this)
@@ -31,12 +31,12 @@ class Handhistory extends React.Component {
 
   componentDidMount() {
     axios.post("http://localhost:5984/chrissi986/_find", {
-        "selector": {
-           "timestamp": {
-              "$gte": "2020-12-01T00:00:00.000Z",
-              "$lt": "2020-12-31T00:00:00.000Z"
-           }
+      "selector": {
+        "timestamp": {
+           "$gte": new Date(this.state.startDate).toISOString(),
+           "$lt": new Date(this.state.endDate).toISOString()
         }
+      }
     })
     .then(jsonResponse => {
       this.setState({
@@ -60,6 +60,7 @@ class Handhistory extends React.Component {
         endDate: new Date(newEndDate)
       });
     }
+    this.componentDidMount()
   }
 
   render() {
