@@ -31,7 +31,7 @@ const DateRangePicker = (props) => {
                 shouldCloseOnSelect={false}
             >
                 <Box>
-                    <Button size="small" variant="contained" color="primary" style={{ float: "right"}}>OK</Button>
+                    <Button onClick={()=>props.handler(startDate, endDate)} size="small" variant="contained" color="primary" style={{ float: "right"}}>OK</Button>
                 </Box>    
             </DatePicker>
           </Box>
