@@ -15,6 +15,14 @@ const theme = createMuiTheme({
       dark: '#be0047',
       contrastText: '#000',
     },
+  },
+  overrides: {
+    MuiDrawer: {
+        paper: {
+            //theme.
+            backgroundColor: "#fafafa",
+    }},
+    
   }
 });
 

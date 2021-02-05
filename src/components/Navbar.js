@@ -18,6 +18,14 @@ import { Link } from "react-router-dom";
     menuListItem: {
       paddingRight: "8px",
       paddingLeft: "8px"
+    },
+    overrides: {
+      MuiDrawer: {
+          paper: {
+              //theme.
+              backgroundColor: "#fafafa",
+      }},
+      
     }
   }));
 
