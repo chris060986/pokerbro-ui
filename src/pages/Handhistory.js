@@ -4,6 +4,7 @@ import HandHistoryTable from '../components/handhistory/HandHistoryTable'
 import HandHistoryDiagram from '../components/handhistory/HandHistoryDiagram'
 import HandHistoryDatePicker from '../components/handhistory/HandHistoryDatePicker'
 import { Box, Toolbar } from '@material-ui/core';
+import TypoGraphy from '@material-ui/core/Typography'
 
 class Handhistory extends React.Component {
 
@@ -47,9 +48,6 @@ class Handhistory extends React.Component {
   }
 
   dateHandler(newStartDate, newEndDate){
-    console.log("toplevel handler")
-    console.log(newStartDate)
-    console.log(newEndDate)
     if(newStartDate!=null){
       this.setState({
         startDate: new Date(newStartDate)
@@ -66,9 +64,9 @@ class Handhistory extends React.Component {
   render() {
     return (
       <div style={{with: "100%"}}>
-      <Box >
+      <Box style={{ margin: "16px"}}>
         <Toolbar style={{ float: "right"}}><HandHistoryDatePicker startDate={this.state.startDate} endDate={this.state.endDate} changeHandler={this.dateHandler}/></Toolbar>
-        <h1>Handhistory</h1><br/>
+        <TypoGraphy variant="h4" component="h1" color="primary" >Handhistory</TypoGraphy>
         <HandHistoryDiagram data={this.createDiagramData()} />
         <HandHistoryTable items={this.state.items} />
       </Box>

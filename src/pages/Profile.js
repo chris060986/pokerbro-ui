@@ -1,11 +1,12 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { Container } from '@material-ui/core';
+import TypoGraphy from '@material-ui/core/Typography'
 
 function Profile() {
   return (
     <Container>
-      <h1>Profile</h1><br/>
+      <TypoGraphy variant="h4" component="h1" color="primary" >Profile</TypoGraphy>
       <span>Enter your username:</span>
       <ul>
          <li><a href="https://bit.ly/39ju0lm">Material Design Colors</a></li>

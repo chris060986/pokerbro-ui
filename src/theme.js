@@ -1,29 +1,20 @@
-import { red } from '@material-ui/core/colors';
 import { createMuiTheme } from '@material-ui/core/styles';
 
 // A custom theme for this app
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#f86100',
+      light: '#6250e2',
+      main: '#1f25af',
+      dark: '#00007e',
+      contrastText: '#fff',
     },
     secondary: {
-      main: '#848482',
+      light: '#ff81a0',
+      main: '#f64c72',
+      dark: '#be0047',
+      contrastText: '#000',
     },
-    error: {
-      main: red.A400,
-    },
-    background: {
-      default: '#b4b4b1',
-    },
-  },
-  overrides: {
-    MuiDrawer: {
-        paper: {
-            //theme.
-            backgroundColor: "#b4b4b1",
-    }},
-    
   }
 });
 

@@ -25,7 +25,7 @@ import { Link } from "react-router-dom";
     const classes = navRailStyle();
     return (
       <>
-        <IconContext.Provider value={{ color: '#f86100' }}>
+        <IconContext.Provider  value={{ color: '#1f25af' }}>
         <div className={classes.toolbar} />
           <Drawer variant="permanent">
             <div className={classes.toolbar} />

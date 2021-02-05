@@ -7,13 +7,13 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const appBarStyle = makeStyles((theme) => ({
     header: {
-        backgroundColor: theme.palette.secondary.dark,
+        backgroundColor: theme.palette.primary,
         zIndex: theme.zIndex.drawer + 1,
     },
     icon: {
         height: "64px",
         width: "64px",
-        color: theme.palette.primary.main,
+        color: theme.palette.primary.contrastText,
     }
   }));
 
@@ -25,7 +25,7 @@ function Header() {
         <AppBar className={classes.header} position="fixed">
           <Toolbar>
             <DiIcons.DiReact className={classes.icon}></DiIcons.DiReact>
-            <TypoGraphy variant="h4" component="h1" color="primary" >The Poker Bro</TypoGraphy>
+            <TypoGraphy variant="h4" component="h1" color="primary-contrastText" >The Poker Bro</TypoGraphy>
           </Toolbar>
         </AppBar>
       </>
