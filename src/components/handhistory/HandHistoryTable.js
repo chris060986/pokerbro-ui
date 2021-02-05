@@ -10,7 +10,7 @@ class HandHistoryTable extends React.Component {
       <>
         <TableContainer  >
           <Table aria-label="handhistory table">
-            <TableHead color="primary" >
+            <TableHead color="primary" style={{ backgroundColor: "#e0e0e0"}}>
               <TableRow>
                 <TableCell />
                 <TableCell>Date</TableCell>

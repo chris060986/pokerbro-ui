@@ -2,7 +2,7 @@ import React from 'react'
 import Cards from './Cards'
 import * as AiIcons from 'react-icons/ai';
 import IconButton from '@material-ui/core/IconButton';
-import { Box, Collapse, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@material-ui/core';
+import { Box, Collapse, TableCell, TableRow, Typography } from '@material-ui/core';
 
 class HandHistoryTableRow extends React.Component {
 
