@@ -1,9 +1,8 @@
 .graph-wrapper{
-  border: 1px solid #848482;
+  
   display: flex;
-  background-color: #848482;
   padding: 25px;
-  box-shadow: 3px 3px 5px rgba(132, 132, 130, 0.75);
+  
   max-width: 1050px;
   margin-bottom: 50px;
 }

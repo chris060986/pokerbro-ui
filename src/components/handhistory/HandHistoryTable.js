@@ -4,6 +4,7 @@ import Cards from './Cards'
 import * as AiIcons from 'react-icons/ai';
 import { IconContext } from 'react-icons';
 import IconButton from '@material-ui/core/IconButton';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 
 class HandHistoryTable extends React.Component {
 
@@ -23,22 +24,6 @@ class HandHistoryTable extends React.Component {
   }
 
   position(doc){
-    //const hero = doc.hero
-    //const button = doc.button
-    //let buttonNumber = -1
-    //let heroNumber = -1
-    //if(hero===button){
-    //  return 'Button'
-    //}
-    //const maxPlayers = doc['max-players']
-    ////console.log(maxPlayers)
-    //Object.values(doc.players).map((player) => (
-    //  buttonNumber = player===button ? player.seat : buttonNumber
-    //))
-    //Object.values(doc.players).map((player) => (
-    //  heroNumber = player===hero ? player.seat : heroNumber
-    //))
-    ////console.log(buttonNumber)
     return "UTG"
   }
 
@@ -65,60 +50,61 @@ class HandHistoryTable extends React.Component {
 
   render(){
       return (
-        <>
-        
-      <table className='HandHistoryTable'>
-        <thead>
-          <tr> 
-            <td>ID</td>
-            <td>Time</td>
-            <td>Stake</td>
-            <td>Cards</td>
-            <td>Position</td>
-            <td>Flop</td>
-            <td>Turn</td>
-            <td>River</td>
-            <td>net won ($)</td>
-            <td>net won (BB)</td>
-            <td>Winner</td>
-            <td>Replay</td>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.values(this.props.items).map((value) => (
-            <tr key={value.id}>
-              <td>{value.id}</td>
-              <td>
+      <>
+        <TableContainer  >
+          <Table aria-label="handhistory table">
+            <TableHead color="primary" >
+              <TableRow>
+                <TableCell />
+                <TableCell>Date</TableCell>
+                <TableCell>ID</TableCell>
+                <TableCell>Stake</TableCell>
+                <TableCell>Position</TableCell>
+                <TableCell>Cards</TableCell>
+                <TableCell align="center" style={{ paddingRight:"0px" }}>Flop</TableCell>
+                <TableCell align="center" style={{ paddingRight:"0px", paddingLeft:"0px" }}>Turn</TableCell>
+                <TableCell align="center" style={{ paddingRight:"0px", paddingLeft:"0px" }}>River</TableCell>
+                <TableCell align="right">net won ($)</TableCell>
+                <TableCell align="right">net won (BB)</TableCell>
+                <TableCell>Winner</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+            {Object.values(this.props.items).map((value) => (
+            <TableRow key={value.id}>
+              <TableCell>
+              <IconButton aria-label="Replay" color="primary">
+                <AiIcons.AiOutlineDownCircle />
+              </IconButton>
+              </TableCell>
+              <TableCell>{value.id}</TableCell>
+              <TableCell>
                 {Intl.DateTimeFormat('de', 
                 { 
                   month: 'numeric',
-                  day: 'numeric', 
+                  day: 'numeric',
+                  year: 'numeric',
                   hour: 'numeric',
                   minute: 'numeric' 
                 }).format(new Date(value.timestamp))}
-              </td>
-              <td>{value.sb}/{value.bb}</td>
-              <td><Cards cards={this.startingHand(value)}/></td>
-              <td>{this.position(value.doc)}</td>
-              <td><Cards cards={this.flopcards(value)}/></td>
-              <td><Cards cards={this.turncard(value)}/></td>
-              <td><Cards cards={this.rivercard(value)}/></td>
-              <td>{value.earnings}</td>
-              <td>{this.earningsInBB(value.earnings, value.bb)}</td>
-              <td>{value.winners}</td>
+              </TableCell>
+              <TableCell>{value.sb}/{value.bb}</TableCell>
+              <TableCell>{this.position(value.doc)}</TableCell>
+              <TableCell><Cards cards={this.startingHand(value)}/></TableCell>
+              <TableCell align="center" style={{ paddingRight:"0px" }}><Cards cards={this.flopcards(value)}/></TableCell>
+              <TableCell align="center" style={{ paddingRight:"0px", paddingLeft:"0px" }}><Cards cards={this.turncard(value)}/></TableCell>
+              <TableCell align="center" style={{ paddingRight:"0px", paddingLeft:"0px" }}><Cards cards={this.rivercard(value)}/></TableCell>
+              <TableCell align="right">{value.earnings}</TableCell>
+              <TableCell align="right">{this.earningsInBB(value.earnings, value.bb)}</TableCell>
+              <TableCell>{value.winners}</TableCell>
               <IconContext.Provider value={{ color: '#f86100' }}>
-              <td>
-              <IconButton aria-label="Replay" color="primary">
-                <AiIcons.AiFillPlayCircle />
-              </IconButton>
-              </td>
               </IconContext.Provider>
-          </tr>
+          </TableRow>
           ))}
-        </tbody>
-      </table>
-      
-          </>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </>
       )
   }
 }
