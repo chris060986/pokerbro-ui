@@ -95,11 +95,13 @@ class HandHistoryTableRow extends React.Component {
                 <TableCell>{this.state.hand.winners}</TableCell>
             </TableRow>
             <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                
+                <TableCell style={{ paddingBottom: 0, paddingTop: 0, align: "center"}} colSpan={12}>
                 <Collapse in={this.state.collapsed} timeout="auto" unmountOnExit>
-                <Box margin={1}>
+                <Box margin={5, 1} style={{backgroundColor: "#e0e0e0", minWidth:"750px", height: "400px"}} >
                     <Typography variant="h6" gutterBottom component="div">
-                    History
+                    Replay Baby
+                    
                     </Typography>
                 </Box>
                 </Collapse>
