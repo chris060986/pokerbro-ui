@@ -97,8 +97,6 @@ class HandHistoryTable extends React.Component {
               <TableCell align="right">{value.earnings}</TableCell>
               <TableCell align="right">{this.earningsInBB(value.earnings, value.bb)}</TableCell>
               <TableCell>{value.winners}</TableCell>
-              <IconContext.Provider value={{ color: '#f86100' }}>
-              </IconContext.Provider>
           </TableRow>
           ))}
             </TableBody>

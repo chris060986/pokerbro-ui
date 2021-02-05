@@ -8,11 +8,11 @@
 }
 
 .spades{
-    color: #FAEBD7;
+    color: #263238;
 }
 
 .hearts{
-    color: #FA8072;
+    color: #f44336;
 }
 
 .diamonds {
@@ -20,5 +20,5 @@
 }
 
 .clubs {
-    color: #00A550;
+    color: #43a047;
 }
