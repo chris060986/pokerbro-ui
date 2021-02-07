@@ -1,7 +1,7 @@
 import React from 'react'
 import './HandHistoryTable.css'
 import HandHistoryTableRow from './HandHistoryTableRow'
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
+import { Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@material-ui/core';
 
 class HandHistoryTable extends React.Component {
 
@@ -9,7 +9,6 @@ class HandHistoryTable extends React.Component {
       return (
       <>
         <Paper elevation={3}>
-        
           <Table aria-label="handhistory table">
             <TableHead color="primary" style={{ backgroundColor: "#e0e0e0"}}>
               <TableRow>
@@ -33,7 +32,6 @@ class HandHistoryTable extends React.Component {
               ))}
             </TableBody>
           </Table>
-          
         </Paper>
       </>
       )
