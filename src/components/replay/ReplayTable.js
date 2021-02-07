@@ -4,6 +4,18 @@ import * as RiIcons from 'react-icons/ri'
 import * as MdIcons from 'react-icons/md'
 import IconButton from '@material-ui/core/IconButton';
 import pokerTableImage from "../pokerTable.png";
+import { withStyles } from '@material-ui/core/styles';
+
+const useStyles = theme => ({
+    test: {
+       backgroundColor: "grey",
+       width:"1100", 
+       height:"600px", 
+       backgroundRepeat: "no-repeat", 
+       backgroundSize: "1100px 600px", 
+       backgroundImage: 'url(' + pokerTableImage + ')'
+     },
+});
 
 
 class ReplayTable extends React.Component {
@@ -18,14 +30,13 @@ class ReplayTable extends React.Component {
     }
 
     render(){
-
-
+        const { classes } = this.props;
         return(
             <Box margin={5, 1} padding={3} style={{ minWidth:"900px", height: "700px",  display: "flow-root"}} >
                 <Typography variant="h6" gutterBottom component="div">{this.state.hand.id}</Typography>
                 <Box style={{ width: "70%", minWidth:"600px", height:"600px", float: "left", padding: "0px 5px 0px 0px"}} >
-                    <Paper elevation={3} style={{ backgroundColor: "#607d8b", width:"1100", height:"600px", backgroundRepeat: "no-repeat", backgroundSize: "1100px 600px", backgroundImage: 'url(' + pokerTableImage + ')' }}>
-                        
+                    <Paper className={classes.test} elevation={3} >
+                     
                     </Paper>
                 </Box>
                 <Box style={{ width: "30%", height:"400px", minWidth:"300px", float: "left", textAlign: "center"}} >
@@ -50,7 +61,7 @@ class ReplayTable extends React.Component {
                     <Paper elevation={3}>
                         <div style={{margin: "auto"}}>
                         <IconButton color="primary" ><MdIcons.MdFastRewind size="1.5em" ></MdIcons.MdFastRewind></IconButton>
-                        <IconButton variant="contained" color="secondary" ><RiIcons.RiRestartFill size="2em"></RiIcons.RiRestartFill></IconButton>
+                        <IconButton color="secondary" ><RiIcons.RiRestartFill size="2em"></RiIcons.RiRestartFill></IconButton>
                         <IconButton color="primary"><MdIcons.MdFastForward size="1.5em" ></MdIcons.MdFastForward></IconButton>
                         <IconButton color="primary"><MdIcons.MdSkipNext size="1.5em"></MdIcons.MdSkipNext></IconButton>
                         <div>
@@ -66,4 +77,4 @@ class ReplayTable extends React.Component {
         )
     }
 }
-export default ReplayTable;
+export default withStyles(useStyles)(ReplayTable);
