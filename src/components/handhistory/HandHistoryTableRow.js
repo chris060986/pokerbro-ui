@@ -2,7 +2,8 @@ import React from 'react'
 import Cards from './Cards'
 import * as AiIcons from 'react-icons/ai';
 import IconButton from '@material-ui/core/IconButton';
-import { Box, Collapse, TableCell, TableRow, Typography } from '@material-ui/core';
+import { Collapse, TableCell, TableRow } from '@material-ui/core';
+import ReplayTable from '../replay/ReplayTable';
 
 class HandHistoryTableRow extends React.Component {
 
@@ -10,7 +11,6 @@ class HandHistoryTableRow extends React.Component {
         super(props);
         this.state = {
             collapsed: false,
-            handBackup: props.hand,
             hand: props.hand
           }
     }
@@ -98,12 +98,7 @@ class HandHistoryTableRow extends React.Component {
                 
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0, align: "center"}} colSpan={12}>
                 <Collapse in={this.state.collapsed} timeout="auto" unmountOnExit>
-                <Box margin={5, 1} style={{backgroundColor: "#e0e0e0", minWidth:"750px", height: "400px"}} >
-                    <Typography variant="h6" gutterBottom component="div">
-                    Replay Baby
-                    
-                    </Typography>
-                </Box>
+                    <ReplayTable hand={this.state.hand} />
                 </Collapse>
                 </TableCell>
             </TableRow>
