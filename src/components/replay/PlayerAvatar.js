@@ -85,9 +85,6 @@ const useStyles = makeStyles((theme) => ({
     stack: {
         fontSize: "0.75rem",
         display: "block"
-    },
-    card1: {
-        color: "green"
     }
   }));
 
@@ -121,7 +118,9 @@ const PlayerAvatar = (props) => {
     return (
         <>
             <Box className={seatboxname} >
+                <div className="avatar-cards">
                 {card1} {card2}
+                </div>
                 <Paper className={classes.avatarPaper} elevation={3} >
                     <Avatar className={classes.large}>{props.player.name.charAt(0)}</Avatar>
                     <span className={classes.typoSpan}>

@@ -1,10 +1,20 @@
-.card-icon{
-  height: 2.5em;
-  width: 2.5em;
-}
-
 .card-icon-wrapper{
     display: inline-block;
+}
+
+.table-cell .card-icon{
+    height: 2.5em;
+    width: 2.5em;
+}
+
+.avatar-cards .card-icon{
+    height: 5em;
+    width: 5em;
+}
+
+.avatar-cards .card-icon-wrapper {
+    margin-left: 20px;
+    margin-right: -40px;
 }
 
 .spades{

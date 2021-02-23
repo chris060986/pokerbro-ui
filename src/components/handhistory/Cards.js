@@ -5,7 +5,7 @@ class Cards extends React.Component{
 
     render(){
         return (
-        <div>
+        <div className="table-cell">
             {Object.entries(this.props.cards).map(([index, value]) =>(
                 <CardIcon key={index} rank={value.rank} suit={value.suit} />
             ))}
