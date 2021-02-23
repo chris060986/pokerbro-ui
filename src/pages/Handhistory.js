@@ -3,6 +3,8 @@ import axios from 'axios';
 import HandHistoryTable from '../components/handhistory/HandHistoryTable'
 import HandHistoryDiagram from '../components/handhistory/HandHistoryDiagram'
 import HandHistoryDatePicker from '../components/handhistory/HandHistoryDatePicker'
+import { Box, Toolbar } from '@material-ui/core';
+import TypoGraphy from '@material-ui/core/Typography'
 
 class Handhistory extends React.Component {
 
@@ -11,39 +13,63 @@ class Handhistory extends React.Component {
     this.state = {
       isLoaded: false,
       items: [],
-      num: 0
+      startDate: new Date().setDate(new Date(new Date().getDate()-75)),
+      endDate: new Date(),
     }
+    this.dateHandler = this.dateHandler.bind(this)
   }
 
   createDiagramData() {
     var lastEarnings = parseFloat(0);
     return Object.values(this.state.items).reduce(function(map, value) {
-      var earnings = parseFloat(value.doc.earnings)
+      var earnings = parseFloat(value.earnings)
       earnings = lastEarnings + earnings
       lastEarnings = earnings
-      map[value.doc.timestamp] = earnings;
+      map[value.timestamp] = earnings;
       return map;
-     }, {});
+     }, { });
   }
 
   componentDidMount() {
-    axios.get("http://localhost:5984/chrissi986/_all_docs?include_docs=true")
+    axios.post("http://localhost:5984/chrissi986/_find", {
+      "selector": {
+        "timestamp": {
+           "$gte": new Date(this.state.startDate).toISOString(),
+           "$lt": new Date(this.state.endDate).toISOString()
+        }
+      }
+    })
     .then(jsonResponse => {
-      console.log(jsonResponse)
       this.setState({
         isLoaded: true,
-        items: jsonResponse.data.rows,
-        num: jsonResponse.data.total_rows
+        items: jsonResponse.data.docs
       })
     })
   }
 
+  dateHandler(newStartDate, newEndDate){
+    if(newStartDate!=null){
+      this.setState({
+        startDate: new Date(newStartDate)
+      });
+    }
+    if(newEndDate!=null){
+      this.setState({
+        endDate: new Date(newEndDate)
+      });
+    }
+    this.componentDidMount()
+  }
+
   render() {
     return (
-      <div className='handhistory'>
-        <HandHistoryDatePicker />
+      <div style={{with: "100%"}}>
+      <Box style={{ margin: "16px"}}>
+        <Toolbar style={{ float: "right"}}><HandHistoryDatePicker startDate={this.state.startDate} endDate={this.state.endDate} changeHandler={this.dateHandler}/></Toolbar>
+        <TypoGraphy variant="h4" component="h1" color="primary" >Handhistory</TypoGraphy>
         <HandHistoryDiagram data={this.createDiagramData()} />
         <HandHistoryTable items={this.state.items} />
+      </Box>
       </div>
     );
   }

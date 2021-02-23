@@ -2,14 +2,19 @@ import React from 'react'
 import './HandHistoryDiagram.css'
 import { LineChart } from 'react-chartkick'
 import 'chart.js'
+import { Paper } from '@material-ui/core';
 
 class HandHistoryDiagram extends React.Component{
 
     render () {
       return (
-        <div className='graph-div'>
-          <LineChart curve={false} messages={{empty: "No data"}} colors={["#f86100"]} data={this.props.data} />
+        <Paper elevation={3} style={{ maxWidth: "1050px", minWidth: "1050px" }}>
+        <div className="graph-wrapper">
+          <div className='graph-div'>
+            <LineChart curve={false} messages={{empty: "No data"}} colors={["#1f25af"]} data={this.props.data} />
+          </div>
         </div>
+        </Paper>
       ) 
     }
 

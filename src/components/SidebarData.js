@@ -7,25 +7,25 @@ export const SidebarData = [
     {
         title: 'Profile',
         path: '/profile',
-        icon: <CgIcons.CgProfile className='nav-icon' />,
+        icon: <CgIcons.CgProfile size="1.3em" className='nav-icon' />,
         cName: 'nav-item'
     },
     {
       title: 'Handhistory',
       path: '/handhistory',
-      icon: <GiIcons.GiPokerHand className='nav-icon' />,
+      icon: <GiIcons.GiPokerHand size="1.3em" className='nav-icon' />,
       cName: 'nav-item'
     },
     {
       title: 'Villains',
       path: '/villains',
-      icon: <GiIcons.GiBandit className='nav-icon'/>,
+      icon: <GiIcons.GiBandit size="1.3em" className='nav-icon'/>,
       cName: 'nav-item'
     },
     {
       title: 'Support',
       path: '/support',
-      icon: <IoIcons.IoMdHelpCircle className='nav-icon'/>,
+      icon: <IoIcons.IoMdHelpCircle size="1.3em" className='nav-icon' />,
       cName: 'nav-item bottom'
     }
   ];
