@@ -62,5 +62,8 @@ export const CardIcons = {
         '4' : <GiIcons.GiCard4Spades className='card-icon spades' />,
         '3' : <GiIcons.GiCard3Spades className='card-icon spades' />,
         '2' : <GiIcons.GiCard2Spades className='card-icon spades' />
+    },
+    'EXTRA' : {
+        'JK' : <GiIcons.GiCardJoker className='card-icon back' />,
     }
 }

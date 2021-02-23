@@ -1,6 +1,7 @@
 import { Avatar, Box, Divider, Paper, Typography } from '@material-ui/core';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import CardIcon from '../cards/CardIcon'
 
 const useStyles = makeStyles((theme) => ({
     small: {
@@ -84,6 +85,9 @@ const useStyles = makeStyles((theme) => ({
     stack: {
         fontSize: "0.75rem",
         display: "block"
+    },
+    card1: {
+        color: "green"
     }
   }));
 
@@ -103,11 +107,21 @@ const PlayerAvatar = (props) => {
     console.log(props.player.seat)
     console.log(props.player.name)
     console.log(props.tablePos)
+    console.log(props.player)
     const classes = useStyles();
     const seatboxname = getClassName(classes, props.tablePos)
+
+    let card1 = <CardIcon suit="EXTRA" rank="JK" />;
+    let card2 = <CardIcon suit="EXTRA" rank="JK" />;
+    if (props.player.hand){
+        card1 = <CardIcon suit={props.player.hand[1].suit} rank={props.player.hand[1].rank} />
+        card2 = <CardIcon suit={props.player.hand[2].suit} rank={props.player.hand[2].rank} />
+    }
+
     return (
         <>
             <Box className={seatboxname} >
+                {card1} {card2}
                 <Paper className={classes.avatarPaper} elevation={3} >
                     <Avatar className={classes.large}>{props.player.name.charAt(0)}</Avatar>
                     <span className={classes.typoSpan}>
