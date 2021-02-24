@@ -1,4 +1,4 @@
-import { Avatar, Box, Divider, Paper, Typography } from '@material-ui/core';
+import { Avatar, Box, Container, Divider, Paper, Typography } from '@material-ui/core';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CardIcon from '../cards/CardIcon'
@@ -14,8 +14,7 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.secondary.contrastText,
         backgroundColor: theme.palette.secondary.main,
         top: "-5px",
-        left: "-12px",
-        marginRight: theme.spacing(1)
+        left: "-12px"
       },
     seatbox0: {
         position: "relative",
@@ -64,7 +63,9 @@ const useStyles = makeStyles((theme) => ({
     },
     avatarPaper:{
         position: "absolute",
-        minWidth: "150px",
+        width: "175px",
+        minWidth: "175px",
+        height: "45px",
         maxHeight: "45px",
         display: "flex",        
         backgroundColor: "#fafafa"
@@ -76,11 +77,17 @@ const useStyles = makeStyles((theme) => ({
     typoSpan: {
         display: "block",
         textAlign: "center",
-        marginTop: "3px"
+        marginTop: "3px",
+        paddingLeft: "8px",
+        whiteSpace: "nowrap",
+        overflow: "hidden"
     },
     playerName: {
         fontSize: "0.875rem",
-        display: "block"
+        display: "block",
+        wordWrap: "break-word",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
     },
     stack: {
         fontSize: "0.75rem",
@@ -123,11 +130,11 @@ const PlayerAvatar = (props) => {
                 </div>
                 <Paper className={classes.avatarPaper} elevation={3} >
                     <Avatar className={classes.large}>{props.player.name.charAt(0)}</Avatar>
-                    <span className={classes.typoSpan}>
+                    <Container className={classes.typoSpan}>
                         <Typography className={classes.playerName}>{props.player.name}</Typography>
                         <Divider />
                         <Typography className={classes.stack}>{props.player.stack}</Typography>
-                    </span>
+                    </Container>
                 </Paper>
                 
             </Box>
