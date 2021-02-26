@@ -8,7 +8,7 @@ class HandHistoryTable extends React.Component {
  render(){
       return (
       <>
-        <Paper elevation={3}>
+        <Paper elevation={3} style={{ display: "inline-block", width: "-webkit-fill-available" }}>
           <Table aria-label="handhistory table">
             <TableHead color="primary" style={{ backgroundColor: "#e0e0e0"}}>
               <TableRow>
