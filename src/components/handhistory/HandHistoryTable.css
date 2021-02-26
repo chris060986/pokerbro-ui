@@ -18,6 +18,13 @@
     height: 70px;
 }
 
+.community-cards .card-icon{
+    height: 4em;
+    width: 4em;
+    background-color: rgba(0, 0, 0, 0.12);
+    margin-left: 8px;
+}
+
 .spades{
     color: #263238;
 }

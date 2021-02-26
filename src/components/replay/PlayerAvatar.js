@@ -39,12 +39,12 @@ const useStyles = makeStyles((theme) => ({
     seatbox4: {
         position: "relative",
         left: "560px",
-        top: "-300px"
+        top: "-280px"
     },
     seatbox5: {
         position: "relative",
         left: "320px",
-        top: "-376px"
+        top: "-356px"
     },
     seatbox6: {
         position: "relative",
@@ -108,10 +108,6 @@ function getClassName(classes, seat){
 }
 
 const PlayerAvatar = (props) => {
-    console.log(props.player.seat)
-    console.log(props.player.name)
-    console.log(props.tablePos)
-    console.log(props.player)
     const classes = useStyles();
     const seatboxname = getClassName(classes, props.tablePos)
 

@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import pokerTableImage from "../pokerTable.png";
 import { withStyles } from '@material-ui/core/styles';
 import PlayerAvatar from "./PlayerAvatar";
+import CommunityCards from "./CommunityCards";
 
 const useStyles = theme => ({
    
@@ -101,10 +102,10 @@ class ReplayTable extends React.Component {
                 <Box className={classes.tableWrapper}>
                     <Box className={classes.pokerTable} >
                         <Paper className={classes.tableBackground} elevation={3} >
-                        {Object.values(this.state.players).map((player, index) => (
-                                    <PlayerAvatar id={player.seat} player={player} tablePos={index} style={{ position: "relative" }}/>
-                                    
-                                ))}
+                            {Object.values(this.state.players).map((player, index) => (
+                                <PlayerAvatar id={player.seat} player={player} tablePos={index} style={{ position: "relative" }}/>
+                            ))}    
+                            <CommunityCards board={this.state.hand.board} />
                         </Paper>
                     </Box>
                     <Box className={classes.tableStats} >
