@@ -18,48 +18,48 @@ const useStyles = makeStyles((theme) => ({
       },
     seatbox0: {
         position: "relative",
-        left: "500px",
+        left: "480px",
         top: "400px"
     },
     seatbox1: {
         position: "relative",
-        left: "730px",
-        top: "400px"
+        left: "750px",
+        top: "280px"
     },
     seatbox2: {
         position: "relative",
-        left: "880px",
-        top: "330px"
+        left: "900px",
+        top: "30px"
     },
     seatbox3: {
         position: "relative",
-        left: "880px",
-        top: "200px"
+        left: "800px",
+        top: "-170px"
     },
     seatbox4: {
         position: "relative",
-        left: "650px",
-        top: "120px"
+        left: "560px",
+        top: "-300px"
     },
     seatbox5: {
         position: "relative",
-        left: "350px",
-        top: "120px"
+        left: "320px",
+        top: "-376px"
     },
     seatbox6: {
         position: "relative",
-        left: "170px",
-        top: "200px"
+        left: "90px",
+        top: "-390px"
     },
     seatbox7: {
         position: "relative",
-        left: "170px",
-        top: "330px"
+        left: "35px",
+        top: "-310px"
     },
     seatbox8: {
         position: "relative",
-        left: "290px",
-        top: "400px"
+        left: "220px",
+        top: "-240px"
     },
     avatarPaper:{
         position: "absolute",
