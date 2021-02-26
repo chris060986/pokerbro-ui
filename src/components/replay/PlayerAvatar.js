@@ -19,12 +19,12 @@ const useStyles = makeStyles((theme) => ({
     seatbox0: {
         position: "relative",
         left: "480px",
-        top: "400px"
+        top: "368px"
     },
     seatbox1: {
         position: "relative",
         left: "750px",
-        top: "280px"
+        top: "265px"
     },
     seatbox2: {
         position: "relative",
@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     seatbox8: {
         position: "relative",
         left: "220px",
-        top: "-240px"
+        top: "-260px"
     },
     avatarPaper:{
         position: "absolute",
