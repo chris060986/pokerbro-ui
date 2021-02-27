@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
         display: "inline-block",
         position: "relative",
         left: "375px",
-        top: "-450px"
+        top: "-480px"
     },
     cardIconTest: {
         backgroundColor: "black",

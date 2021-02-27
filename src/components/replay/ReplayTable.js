@@ -3,10 +3,11 @@ import React from 'react'
 import * as RiIcons from 'react-icons/ri'
 import * as MdIcons from 'react-icons/md'
 import IconButton from '@material-ui/core/IconButton';
-import pokerTableImage from "../pokerTable.png";
+import pokerTableImage from "./images/pokerTable.png";
 import { withStyles } from '@material-ui/core/styles';
 import PlayerAvatar from "./PlayerAvatar";
 import CommunityCards from "./CommunityCards";
+import Pot from "./Pot";
 
 const useStyles = theme => ({
    
@@ -90,12 +91,14 @@ class ReplayTable extends React.Component {
             collapsed: false,
             handBackup: props.hand,
             hand: props.hand,
+            pot: 0,
             players: shiftPlayers(props.hand.hero, props.hand.players)
           }
     }
 
     render(){
         const { classes } = this.props;
+        const hasPot = this.state.pot > 0;
         return(
             <Box className={classes.replayTableRoot} margin={5, 1} padding={3} >
                 <Typography className={classes.handID} variant="h6" gutterBottom component="div">{this.state.hand.id}</Typography>
@@ -106,6 +109,7 @@ class ReplayTable extends React.Component {
                                 <PlayerAvatar id={player.seat} player={player} tablePos={index} style={{ position: "relative" }}/>
                             ))}    
                             <CommunityCards board={this.state.hand.board} />
+                            { hasPot ? <Pot potSize={this.state.pot} /> : <></> }
                         </Paper>
                     </Box>
                     <Box className={classes.tableStats} >
