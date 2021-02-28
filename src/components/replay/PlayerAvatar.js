@@ -1,7 +1,8 @@
 import { Avatar, Box, Container, Divider, Paper, Typography } from '@material-ui/core';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import CardIcon from '../cards/CardIcon'
+import CardIcon from '../cards/CardIcon';
+import dealerButton from './images/dealer.png';
 
 const useStyles = makeStyles((theme) => ({
     small: {
@@ -92,6 +93,11 @@ const useStyles = makeStyles((theme) => ({
     stack: {
         fontSize: "0.75rem",
         display: "block"
+    },
+    dealerButton: {
+      display: "inline-block",
+      width: "37px",
+      height: "24px"
     }
   }));
 
@@ -121,8 +127,10 @@ const PlayerAvatar = (props) => {
     return (
         <>
             <Box className={seatboxname} >
+                
                 <div className="avatar-cards">
                 {card1} {card2}
+                {props.isDealer ? <img src={dealerButton} alt="Dealer" className={classes.dealerButton} /> : <></> }
                 </div>
                 <Paper className={classes.avatarPaper} elevation={3} >
                     <Avatar className={classes.large}>{props.player.name.charAt(0)}</Avatar>

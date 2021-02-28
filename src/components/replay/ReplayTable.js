@@ -36,7 +36,7 @@ const useStyles = theme => ({
         marginRight: "24px"
      },
      tableBackground: {
-        backgroundColor: "grey",
+        backgroundColor: "lightgrey",
         width:"1100px", 
         height:"600px", 
         backgroundRepeat: "no-repeat", 
@@ -74,10 +74,8 @@ const useStyles = theme => ({
         margin: "auto"
       },
       tablebackgroundfont: {
-          display: "inline-block",
-          position: "relative",
-          left: "20px",
-          top: "-160px"
+          display: "inline",
+          position: "absolute",
       }
     });
 
@@ -103,6 +101,10 @@ class ReplayTable extends React.Component {
           }
     }
 
+    isDealer(playername){
+        return (this.props.hand.button === playername);
+    }
+
     render(){
         const { classes } = this.props;
         const hasPot = this.state.pot > 0;
@@ -113,11 +115,11 @@ class ReplayTable extends React.Component {
                     <Box className={classes.pokerTable} >
                         <Paper className={classes.tableBackground} elevation={3} >
                             {Object.values(this.state.players).map((player, index) => (
-                                <PlayerAvatar id={player.seat} player={player} tablePos={index} style={{ position: "relative" }}/>
+                                <PlayerAvatar id={player.seat} player={player} tablePos={index} isDealer={this.isDealer(player.name)} style={{ position: "relative" }}/>
                             ))}    
-                            <img src={tableBackgoundFont} alt="The Poker Bro" className={classes.tablebackgroundfont} />
                             <CommunityCards board={this.state.hand.board} />
                             { hasPot ? <Pot potSize={this.state.pot} /> : <></> }
+                            <Box><img src={tableBackgoundFont} alt="The Poker Bro" className={classes.tablebackgroundfont} /></Box>
                         </Paper>
                     </Box>
                     <Box className={classes.tableStats} >
