@@ -1,9 +1,8 @@
-
-import * as DiIcons from 'react-icons/di';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar'
-import TypoGraphy from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles';
+import headline from './Headline.png';
+import PokerBroIcon from './PokerBroIcon.png';
 
 const appBarStyle = makeStyles((theme) => ({
     header: {
@@ -14,6 +13,9 @@ const appBarStyle = makeStyles((theme) => ({
         height: "64px",
         width: "64px",
         color: theme.palette.primary.contrastText,
+        marginRight: theme.spacing(2),
+        padding: theme.spacing(1)
+        
     }
   }));
 
@@ -24,8 +26,8 @@ function Header() {
       <>
         <AppBar className={classes.header} position="fixed">
           <Toolbar>
-            <DiIcons.DiReact className={classes.icon}></DiIcons.DiReact>
-            <TypoGraphy variant="h4" component="h1" color="primary-contrastText" >The Poker Bro</TypoGraphy>
+            <img src={PokerBroIcon} alt="The Poker Bro Icon" className={classes.icon} />
+            <img src={headline} alt="The Poker Bro" />
           </Toolbar>
         </AppBar>
       </>

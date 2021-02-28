@@ -7,8 +7,8 @@ const useStyles = makeStyles((theme) => ({
     communityCardWrapper: {
         display: "inline-block",
         position: "relative",
-        left: "375px",
-        top: "-480px"
+        left: "210px",
+        top: "-470px"
     },
     cardIconTest: {
         backgroundColor: "black",

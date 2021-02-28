@@ -8,6 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 import PlayerAvatar from "./PlayerAvatar";
 import CommunityCards from "./CommunityCards";
 import Pot from "./Pot";
+import tableBackgoundFont from './images/pokerbroHeadline.png'
 
 const useStyles = theme => ({
    
@@ -71,6 +72,12 @@ const useStyles = theme => ({
       tablestateButtonWrapper: {
         width: "300px",
         margin: "auto"
+      },
+      tablebackgroundfont: {
+          display: "inline-block",
+          position: "relative",
+          left: "20px",
+          top: "-160px"
       }
     });
 
@@ -108,6 +115,7 @@ class ReplayTable extends React.Component {
                             {Object.values(this.state.players).map((player, index) => (
                                 <PlayerAvatar id={player.seat} player={player} tablePos={index} style={{ position: "relative" }}/>
                             ))}    
+                            <img src={tableBackgoundFont} alt="The Poker Bro" className={classes.tablebackgroundfont} />
                             <CommunityCards board={this.state.hand.board} />
                             { hasPot ? <Pot potSize={this.state.pot} /> : <></> }
                         </Paper>
