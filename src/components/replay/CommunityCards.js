@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
         display: "inline-block",
         position: "relative",
         left: "380px",
-        top: "-470px"
+        top: "210px"
     },
     cardIconTest: {
         backgroundColor: "black",
@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
 
 const CommunityCards = (props) => {
     const classes = useStyles();
-    console.log(props.board)
     if(props.board) {
         return (
             <>

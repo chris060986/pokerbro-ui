@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import CardIcon from '../cards/CardIcon';
 import dealerButton from './images/dealer.png';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme, props) => ({
     small: {
         width: theme.spacing(3),
         height: theme.spacing(3),
@@ -17,51 +17,11 @@ const useStyles = makeStyles((theme) => ({
         top: "-5px",
         left: "-12px"
       },
-    seatbox0: {
-        position: "relative",
-        left: "480px",
-        top: "368px"
-    },
-    seatbox1: {
-        position: "relative",
-        left: "750px",
-        top: "265px"
-    },
-    seatbox2: {
-        position: "relative",
-        left: "900px",
-        top: "30px"
-    },
-    seatbox3: {
-        position: "relative",
-        left: "800px",
-        top: "-170px"
-    },
-    seatbox4: {
-        position: "relative",
-        left: "560px",
-        top: "-280px"
-    },
-    seatbox5: {
-        position: "relative",
-        left: "320px",
-        top: "-356px"
-    },
-    seatbox6: {
-        position: "relative",
-        left: "90px",
-        top: "-390px"
-    },
-    seatbox7: {
-        position: "relative",
-        left: "35px",
-        top: "-310px"
-    },
-    seatbox8: {
-        position: "relative",
-        left: "220px",
-        top: "-260px"
-    },
+    seatbox: {
+        position: "absolute",
+        left: props => props.leftPos,
+        top: props => props.topPos,
+    },  
     avatarPaper:{
         position: "absolute",
         width: "175px",
@@ -101,21 +61,8 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-function getClassName(classes, seat){
-    if(seat===0) return classes.seatbox0;
-    if(seat===1) return classes.seatbox1;
-    if(seat===2) return classes.seatbox2;
-    if(seat===3) return classes.seatbox3;
-    if(seat===4) return classes.seatbox4;
-    if(seat===5) return classes.seatbox5;
-    if(seat===6) return classes.seatbox6;
-    if(seat===7) return classes.seatbox7;
-    if(seat===8) return classes.seatbox8;
-}
-
 const PlayerAvatar = (props) => {
-    const classes = useStyles();
-    const seatboxname = getClassName(classes, props.tablePos)
+    const classes = useStyles(props);
 
     let card1 = <CardIcon suit="EXTRA" rank="JK" />;
     let card2 = <CardIcon suit="EXTRA" rank="JK" />;
@@ -126,10 +73,10 @@ const PlayerAvatar = (props) => {
 
     return (
         <>
-            <Box className={seatboxname} >
+            <Box className={classes.seatbox} >
                 <div className="avatar-cards">
                 {card1} {card2}
-                {props.isDealer ? <img src={dealerButton} alt="Dealer" className={`${classes.dealerButton} ${seatboxname}`} /> : <></> }
+                {props.isDealer ? <img src={dealerButton} alt="Dealer" className={classes.dealerButton} /> : <></> }
                 </div>
                 <Paper className={classes.avatarPaper} elevation={3} >
                     <Avatar className={classes.large}>{props.player.name.charAt(0)}</Avatar>

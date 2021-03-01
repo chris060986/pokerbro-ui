@@ -22,7 +22,8 @@ const useStyles = theme => ({
         height: "700px"
      },
      tableWrapper: {
-         display: "block",
+         display: "contents",
+         position: "absolute",
          height: "700px"
      },
      pokerTable: {
@@ -42,6 +43,11 @@ const useStyles = theme => ({
         backgroundRepeat: "no-repeat", 
         backgroundSize: "1100px 600px", 
         backgroundImage: 'url(' + pokerTableImage + ')',
+        display: "block",
+        position: "relative"
+      },
+      avatarWrapper: {
+        transform: "translate(-9%, 0)"
       },
       tableStats: {
         display: "table",
@@ -75,9 +81,10 @@ const useStyles = theme => ({
       },
       tablebackgroundfont: {
           display: "inline",
-          position: "relative",
-          left: "20px",
-          top: "-200px"
+          position: "absolute",
+          left: "0",
+          bottom: "0px",
+          margin: theme.spacing(2)
       }
     });
 
@@ -86,7 +93,6 @@ function shiftPlayers(hero, playersList){
         var removed = playersList.shift()
         playersList.push(removed)
     }
-    console.log(playersList)
     return playersList
 }
 
@@ -99,12 +105,43 @@ class ReplayTable extends React.Component {
             handBackup: props.hand,
             hand: props.hand,
             pot: 0,
-            players: shiftPlayers(props.hand.hero, props.hand.players)
+            players: shiftPlayers(props.hand.hero, props.hand.players),
+            avatarTopPos: [],
+            avatarLeftPos: [],
+            test: [],
           }
+        this.calcAvatarPositions(this.state.hand.players.length)
     }
 
     isDealer(playername){
         return (this.props.hand.button === playername);
+    }
+
+    calcAvatarPositions(numberOfPlayers){
+        const radiusX = 450;
+        const radiusY = 200;
+        const mainHeight = 420;
+        const mainWidth = 1100;
+        let avatarTopPos=[];
+        let avatarLeftPos=[];
+        let frags = 360 / numberOfPlayers;
+        for (var i = 0; i < numberOfPlayers; i++) {
+            let theta = (frags / 180) * i * Math.PI;
+            let posx = Math.round(radiusX * (Math.cos(theta))) + 'px';
+            let posy = Math.round(radiusY * (Math.sin(theta))) + 'px';
+            avatarTopPos.push(((mainHeight / 2) - parseInt(posy.slice(0, -2))) + 'px');
+            avatarLeftPos.push(((mainWidth / 2) + parseInt(posx.slice(0, -2))) + 'px');
+        }
+        this.state.avatarLeftPos=avatarLeftPos;
+        this.state.avatarTopPos=avatarTopPos;
+    }
+
+    getAvatarLeftPostition(seat){
+        return this.state.avatarLeftPos[seat]
+    }
+
+    getAvatarTopPostition(seat){
+        return this.state.avatarTopPos[seat]
     }
 
     render(){
@@ -116,9 +153,12 @@ class ReplayTable extends React.Component {
                 <Box className={classes.tableWrapper}>
                     <Box className={classes.pokerTable} >
                         <Paper className={classes.tableBackground} elevation={3} >
-                            {Object.values(this.state.players).map((player, index) => (
-                                <PlayerAvatar id={player.seat} player={player} tablePos={index} isDealer={this.isDealer(player.name)} style={{ position: "relative" }}/>
-                            ))}    
+                            <Box className={classes.avatarWrapper} >
+                                {Object.values(this.state.players).map((player, index) => (
+                                    <PlayerAvatar id={player.seat} player={player} tablePos={index} 
+                                    leftPos={this.getAvatarLeftPostition(index)} topPos={this.getAvatarTopPostition(index)} isDealer={this.isDealer(player.name)} />
+                                ))}
+                            </Box>    
                             <CommunityCards board={this.state.hand.board} />
                             { hasPot ? <Pot potSize={this.state.pot} /> : <></> }
                             <Box><img src={tableBackgoundFont} alt="The Poker Bro" className={classes.tablebackgroundfont} /></Box>
