@@ -75,7 +75,9 @@ const useStyles = theme => ({
       },
       tablebackgroundfont: {
           display: "inline",
-          position: "absolute",
+          position: "relative",
+          left: "20px",
+          top: "-200px"
       }
     });
 

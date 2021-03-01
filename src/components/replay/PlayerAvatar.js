@@ -127,10 +127,9 @@ const PlayerAvatar = (props) => {
     return (
         <>
             <Box className={seatboxname} >
-                
                 <div className="avatar-cards">
                 {card1} {card2}
-                {props.isDealer ? <img src={dealerButton} alt="Dealer" className={classes.dealerButton} /> : <></> }
+                {props.isDealer ? <img src={dealerButton} alt="Dealer" className={`${classes.dealerButton} ${seatboxname}`} /> : <></> }
                 </div>
                 <Paper className={classes.avatarPaper} elevation={3} >
                     <Avatar className={classes.large}>{props.player.name.charAt(0)}</Avatar>
