@@ -43,7 +43,7 @@ const useStyles = theme => ({
         height:"600px", 
         backgroundRepeat: "no-repeat", 
         backgroundSize: "1100px 600px", 
-        //backgroundImage: 'url(' + pokerTableImage + ')',
+        backgroundImage: 'url(' + pokerTableImage + ')',
         display: "block",
         position: "relative"
       },
@@ -94,8 +94,7 @@ const useStyles = theme => ({
     });
 
 function shiftPlayers(hero, playersList){
-    //TODO: make sure hero is shifted to right seat
-    const maxPlayers = playersList.length-1
+    const maxPlayers = playersList.length > 6 ? playersList.length-1 : playersList.length
     while(hero.valueOf()!=playersList[maxPlayers-1].name.valueOf()) {
         var removed = playersList.shift()
         playersList.push(removed)
