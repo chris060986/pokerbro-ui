@@ -89,11 +89,29 @@ const useStyles = theme => ({
     });
 
 function shiftPlayers(hero, playersList){
-    while(hero.valueOf()!=playersList[0].name.valueOf()) {
+    while(hero.valueOf()!=playersList[7].name.valueOf()) {
         var removed = playersList.shift()
         playersList.push(removed)
     }
     return playersList
+}
+
+function calcAvatarPositions(numberOfPlayers){
+    const radiusX = 450;
+    const radiusY = 200;
+    const mainHeight = 420;
+    const mainWidth = 1100;
+    let avatarTopPos=[];
+    let avatarLeftPos=[];
+    let frags = 360 / numberOfPlayers;
+    for (var i = 0; i < numberOfPlayers; i++) {
+        let theta = (frags / 180) * i * Math.PI;
+        let posx = Math.round(radiusX * (Math.cos(theta))) + 'px';
+        let posy = Math.round(radiusY * (Math.sin(theta))) + 'px';
+        avatarTopPos.push(((mainHeight / 2) - parseInt(posy.slice(0, -2))) + 'px');
+        avatarLeftPos.push(((mainWidth / 2) + parseInt(posx.slice(0, -2))) + 'px');
+    }
+    return({avatarLeftPos, avatarTopPos})
 }
 
 class ReplayTable extends React.Component {
@@ -106,34 +124,13 @@ class ReplayTable extends React.Component {
             hand: props.hand,
             pot: 0,
             players: shiftPlayers(props.hand.hero, props.hand.players),
-            avatarTopPos: [],
-            avatarLeftPos: [],
-            test: [],
+            avatarTopPos: calcAvatarPositions(props.hand.players.length).avatarTopPos,
+            avatarLeftPos: calcAvatarPositions(props.hand.players.length).avatarLeftPos,
           }
-        this.calcAvatarPositions(this.state.hand.players.length)
     }
 
     isDealer(playername){
         return (this.props.hand.button === playername);
-    }
-
-    calcAvatarPositions(numberOfPlayers){
-        const radiusX = 450;
-        const radiusY = 200;
-        const mainHeight = 420;
-        const mainWidth = 1100;
-        let avatarTopPos=[];
-        let avatarLeftPos=[];
-        let frags = 360 / numberOfPlayers;
-        for (var i = 0; i < numberOfPlayers; i++) {
-            let theta = (frags / 180) * i * Math.PI;
-            let posx = Math.round(radiusX * (Math.cos(theta))) + 'px';
-            let posy = Math.round(radiusY * (Math.sin(theta))) + 'px';
-            avatarTopPos.push(((mainHeight / 2) - parseInt(posy.slice(0, -2))) + 'px');
-            avatarLeftPos.push(((mainWidth / 2) + parseInt(posx.slice(0, -2))) + 'px');
-        }
-        this.state.avatarLeftPos=avatarLeftPos;
-        this.state.avatarTopPos=avatarTopPos;
     }
 
     getAvatarLeftPostition(seat){
