@@ -4,11 +4,10 @@ import pot from './images/pot.png';
 
 const useStyles = makeStyles((theme) => ({
     pot:{
-        backgroundColor: "green",
         display: "inline",
-        position: "relative",
+        position: "absolute",
         left: "500px",
-        top: "-480px"
+        top: "310px"
     },
     potPicture: {
         display: "block",
@@ -22,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.primary.contrastText
     }
 }));
-
 
 const Pot = (props) => {
     const classes = useStyles();

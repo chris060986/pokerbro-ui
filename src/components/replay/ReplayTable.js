@@ -8,6 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 import PlayerAvatar from "./PlayerAvatar";
 import CommunityCards from "./CommunityCards";
 import DealerButton from "./DealerButton";
+import Bet from "./Bet";
 import Pot from "./Pot";
 import tableBackgoundFont from './images/pokerbroHeadline.png'
 
@@ -102,40 +103,39 @@ function shiftPlayers(hero, playersList){
     return playersList
 }
 
-function calcAvatarPositions(numberOfPlayers){
-    const radiusX = 450;
-    const radiusY = 220;
-    const mainHeight = 450;
-    const mainWidth = 1100;
-    let avatarTopPos=[];
-    let avatarLeftPos=[];
-    let frags = 360 / numberOfPlayers;
-    for (var i = 0; i < numberOfPlayers; i++) {
+function calcPositionOnEllipse(numberOfItems, radiusX, radiusY, mainHeight, mainWidth, thetaOffset){
+    let topPos=[];
+    let leftPos=[];
+    let frags = 360 / numberOfItems;
+    for (var i = 0; i < numberOfItems; i++) {
         let theta = (frags / 180) * i * Math.PI;
-        let posx = Math.round(radiusX * (Math.cos(theta))) + 'px';
-        let posy = Math.round(radiusY * (Math.sin(theta))) + 'px';
-        avatarTopPos.push(((mainHeight / 2) - parseInt(posy.slice(0, -2))) + 'px');
-        avatarLeftPos.push(((mainWidth / 2) + parseInt(posx.slice(0, -2))) + 'px');
+        let posx = Math.round(radiusX * (Math.cos(theta+thetaOffset))) + 'px';
+        let posy = Math.round(radiusY * (Math.sin(theta+thetaOffset))) + 'px';
+        topPos.push(((mainHeight / 2) - parseInt(posy.slice(0, -2))) + 'px');
+        leftPos.push(((mainWidth / 2) + parseInt(posx.slice(0, -2))) + 'px');
     }
+    return ({leftPos, topPos});
+}
+
+function calcAvatarPositions(numberOfPlayers){
+    let pos  = calcPositionOnEllipse(numberOfPlayers, 450, 220, 450, 1100, 0)
+    let avatarLeftPos = pos.leftPos
+    let avatarTopPos = pos.topPos
     return({avatarLeftPos, avatarTopPos})
 }
 
 function calcDealerButtonPositions(numberOfPlayers){
-    const radiusX = 330;
-    const radiusY = 130;
-    const mainHeight = 570;
-    const mainWidth = 1090;
-    let buttonTopPos=[];
-    let buttonLeftPos=[];
-    let frags = 360 / numberOfPlayers;
-    for (var i = 0; i < numberOfPlayers; i++) {
-        let theta = (frags / 180) * i * Math.PI;
-        let posx = Math.round(radiusX * (Math.cos(theta))) + 'px';
-        let posy = Math.round(radiusY * (Math.sin(theta))) + 'px';
-        buttonTopPos.push(((mainHeight / 2) - parseInt(posy.slice(0, -2))) + 'px');
-        buttonLeftPos.push(((mainWidth / 2) + parseInt(posx.slice(0, -2))) + 'px');
-    }
+    let pos  = calcPositionOnEllipse(numberOfPlayers, 340, 130, 570, 1090, -0.089)
+    let buttonLeftPos=pos.leftPos;
+    let buttonTopPos=pos.topPos;
     return({buttonLeftPos, buttonTopPos})
+}
+
+function calcBetPositions(numberOfPlayers){
+    let pos  = calcPositionOnEllipse(numberOfPlayers, 320, 120, 560, 1100, 0.089)
+    let betLeftPos=pos.leftPos;
+    let betTopPos=pos.topPos;
+    return({betLeftPos, betTopPos})
 }
 
 class ReplayTable extends React.Component {
@@ -146,11 +146,12 @@ class ReplayTable extends React.Component {
             collapsed: false,
             handBackup: props.hand,
             hand: props.hand,
-            pot: 0,
+            pot: 5,
             players: shiftPlayers(props.hand.hero, props.hand.players),
             avatarTopPos: calcAvatarPositions(props.hand.players.length).avatarTopPos,
             avatarLeftPos: calcAvatarPositions(props.hand.players.length).avatarLeftPos,
-            dealerPositions: calcDealerButtonPositions(props.hand.players.length)
+            dealerPositions: calcDealerButtonPositions(props.hand.players.length),
+            betPositions: calcBetPositions(props.hand.players.length)
           }
     }
 
@@ -172,6 +173,12 @@ class ReplayTable extends React.Component {
         return {leftPos, topPos};
     }
 
+    getBetPosition(seat){
+       let leftPos = this.state.betPositions.betLeftPos[seat]
+       let topPos = this.state.betPositions.betTopPos[seat]
+       return {leftPos, topPos};
+    }
+
     getAvatarLeftPostition(seat){
         return this.state.avatarLeftPos[seat]
     }
@@ -191,7 +198,8 @@ class ReplayTable extends React.Component {
         <DealerButton position={this.getDealerPosition(5)}  />
         <DealerButton position={this.getDealerPosition(6)}  />
         <DealerButton position={this.getDealerPosition(7)}  />
-        <DealerButton position={this.getDealerPosition(8)}  />*/
+        <DealerButton position={this.getDealerPosition(8)}  />
+         <DealerButton position={this.getDealerPosition(this.getDealerSeat())} />*/
         return(
             <Box className={classes.replayTableRoot} margin={5, 1} padding={3} >
                 <Typography className={classes.handID} variant="h6" gutterBottom component="div">{this.state.hand.id}</Typography>
@@ -202,13 +210,24 @@ class ReplayTable extends React.Component {
                                 {Object.values(this.state.players).map((player, index) => (
                                     <PlayerAvatar id={player.seat} player={player} tablePos={index} 
                                     leftPos={this.getAvatarLeftPostition(index)} topPos={this.getAvatarTopPostition(index)} />
-                                    
                                 ))}
                             </Box>
                             <Box className={classes.dealerButtonWrapper} > 
-                                <DealerButton position={this.getDealerPosition(this.getDealerSeat())} />
-                            </Box>   
-                            
+                            <DealerButton position={this.getDealerPosition(0)}  />
+                            <DealerButton position={this.getDealerPosition(1)}  />
+                            <DealerButton position={this.getDealerPosition(2)}  />
+                            <DealerButton position={this.getDealerPosition(3)}  />
+                            <DealerButton position={this.getDealerPosition(4)}  />
+                            <DealerButton position={this.getDealerPosition(5)}  />
+                            <DealerButton position={this.getDealerPosition(6)}  />
+                            <DealerButton position={this.getDealerPosition(7)}  />
+                            <DealerButton position={this.getDealerPosition(8)}  />
+                            </Box>
+                            <Box className={classes.dealerButtonWrapper} > 
+                                {Object.values(this.state.players).map((player, index) => (
+                                    <Bet id={player.seat} position={this.getBetPosition(index)} betSize="5" />
+                                ))}
+                            </Box>
                             <CommunityCards board={this.state.hand.board} />
                             { hasPot ? <Pot potSize={this.state.pot} /> : <></> }
                             <Box><img src={tableBackgoundFont} alt="The Poker Bro" className={classes.tablebackgroundfont} /></Box>
