@@ -7,8 +7,7 @@ import pokerTableImage from "./images/pokerTable.png";
 import { withStyles } from '@material-ui/core/styles';
 import PlayerAvatar from "./PlayerAvatar";
 import CommunityCards from "./CommunityCards";
-import DealerButton from "./DealerButton";
-import Bet from "./Bet";
+import ChipWrapper from "./ChipWrapper";
 import Pot from "./Pot";
 import tableBackgoundFont from './images/pokerbroHeadline.png'
 
@@ -51,7 +50,7 @@ const useStyles = theme => ({
       avatarWrapper: {
         transform: "translate(-9%, 0)"
       },
-      dealerButtonWrapper: {
+      chipButtonWrapper: {
           transform: "translate(-3%, 0)",
           zIndex: "-1"
       },
@@ -124,13 +123,6 @@ function calcAvatarPositions(numberOfPlayers){
     return({avatarLeftPos, avatarTopPos})
 }
 
-function calcDealerButtonPositions(numberOfPlayers){
-    let pos  = calcPositionOnEllipse(numberOfPlayers, 340, 130, 570, 1090, -0.089)
-    let buttonLeftPos=pos.leftPos;
-    let buttonTopPos=pos.topPos;
-    return({buttonLeftPos, buttonTopPos})
-}
-
 function calcBetPositions(numberOfPlayers){
     let pos  = calcPositionOnEllipse(numberOfPlayers, 320, 120, 560, 1100, 0.089)
     let betLeftPos=pos.leftPos;
@@ -150,27 +142,13 @@ class ReplayTable extends React.Component {
             players: shiftPlayers(props.hand.hero, props.hand.players),
             avatarTopPos: calcAvatarPositions(props.hand.players.length).avatarTopPos,
             avatarLeftPos: calcAvatarPositions(props.hand.players.length).avatarLeftPos,
-            dealerPositions: calcDealerButtonPositions(props.hand.players.length),
             betPositions: calcBetPositions(props.hand.players.length)
           }
     }
 
-    getDealerSeat(){
-        console.log(this.state.players)
-        for(var i =0; i<this.state.players.length; i++){
-            console.log("button: " + this.props.hand.button.valueOf())
-            console.log(this.state.players[i].name.valueOf())
-            if(this.props.hand.button.valueOf()===this.state.players[i].name.valueOf()) {
-                console.log("dealer: " + this.state.players[i].seat)
-                return this.state.players[i].seat
-            }
-        }
-    }
-
-    getDealerPosition(seat){
-        let leftPos = this.state.dealerPositions.buttonLeftPos[seat]
-        let topPos = this.state.dealerPositions.buttonTopPos[seat]
-        return {leftPos, topPos};
+    isDealer(playerName){
+        return true
+        //return (this.state.hand.button.valueOf()===playerName.valueOf())
     }
 
     getBetPosition(seat){
@@ -190,16 +168,7 @@ class ReplayTable extends React.Component {
     render(){
         const { classes } = this.props;
         const hasPot = this.state.pot > 0;
-        /*<DealerButton position={this.getDealerPosition(0)}  />
-        <DealerButton position={this.getDealerPosition(1)}  />
-        <DealerButton position={this.getDealerPosition(2)}  />
-        <DealerButton position={this.getDealerPosition(3)}  />
-        <DealerButton position={this.getDealerPosition(4)}  />
-        <DealerButton position={this.getDealerPosition(5)}  />
-        <DealerButton position={this.getDealerPosition(6)}  />
-        <DealerButton position={this.getDealerPosition(7)}  />
-        <DealerButton position={this.getDealerPosition(8)}  />
-         <DealerButton position={this.getDealerPosition(this.getDealerSeat())} />*/
+
         return(
             <Box className={classes.replayTableRoot} margin={5, 1} padding={3} >
                 <Typography className={classes.handID} variant="h6" gutterBottom component="div">{this.state.hand.id}</Typography>
@@ -212,20 +181,10 @@ class ReplayTable extends React.Component {
                                     leftPos={this.getAvatarLeftPostition(index)} topPos={this.getAvatarTopPostition(index)} />
                                 ))}
                             </Box>
-                            <Box className={classes.dealerButtonWrapper} > 
-                            <DealerButton position={this.getDealerPosition(0)}  />
-                            <DealerButton position={this.getDealerPosition(1)}  />
-                            <DealerButton position={this.getDealerPosition(2)}  />
-                            <DealerButton position={this.getDealerPosition(3)}  />
-                            <DealerButton position={this.getDealerPosition(4)}  />
-                            <DealerButton position={this.getDealerPosition(5)}  />
-                            <DealerButton position={this.getDealerPosition(6)}  />
-                            <DealerButton position={this.getDealerPosition(7)}  />
-                            <DealerButton position={this.getDealerPosition(8)}  />
-                            </Box>
-                            <Box className={classes.dealerButtonWrapper} > 
+                            
+                            <Box className={classes.chipButtonWrapper} > 
                                 {Object.values(this.state.players).map((player, index) => (
-                                    <Bet id={player.seat} position={this.getBetPosition(index)} betSize="5" />
+                                    <ChipWrapper id={player.seat} position={this.getBetPosition(index)} betSize="5" isDealer={this.isDealer(player.name)} />
                                 ))}
                             </Box>
                             <CommunityCards board={this.state.hand.board} />
