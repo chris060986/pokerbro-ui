@@ -7,6 +7,7 @@ import pokerTableImage from "./images/pokerTable.png";
 import { withStyles } from '@material-ui/core/styles';
 import PlayerAvatar from "./PlayerAvatar";
 import CommunityCards from "./CommunityCards";
+import DealerButton from "./DealerButton";
 import Pot from "./Pot";
 import tableBackgoundFont from './images/pokerbroHeadline.png'
 
@@ -42,12 +43,16 @@ const useStyles = theme => ({
         height:"600px", 
         backgroundRepeat: "no-repeat", 
         backgroundSize: "1100px 600px", 
-        backgroundImage: 'url(' + pokerTableImage + ')',
+        //backgroundImage: 'url(' + pokerTableImage + ')',
         display: "block",
         position: "relative"
       },
       avatarWrapper: {
         transform: "translate(-9%, 0)"
+      },
+      dealerButtonWrapper: {
+          transform: "translate(-3%, 0)",
+          zIndex: "-1"
       },
       tableStats: {
         display: "table",
@@ -89,7 +94,9 @@ const useStyles = theme => ({
     });
 
 function shiftPlayers(hero, playersList){
-    while(hero.valueOf()!=playersList[7].name.valueOf()) {
+    //TODO: make sure hero is shifted to right seat
+    const maxPlayers = playersList.length-1
+    while(hero.valueOf()!=playersList[maxPlayers-1].name.valueOf()) {
         var removed = playersList.shift()
         playersList.push(removed)
     }
@@ -98,8 +105,8 @@ function shiftPlayers(hero, playersList){
 
 function calcAvatarPositions(numberOfPlayers){
     const radiusX = 450;
-    const radiusY = 200;
-    const mainHeight = 420;
+    const radiusY = 220;
+    const mainHeight = 450;
     const mainWidth = 1100;
     let avatarTopPos=[];
     let avatarLeftPos=[];
@@ -114,6 +121,24 @@ function calcAvatarPositions(numberOfPlayers){
     return({avatarLeftPos, avatarTopPos})
 }
 
+function calcDealerButtonPositions(numberOfPlayers){
+    const radiusX = 330;
+    const radiusY = 130;
+    const mainHeight = 570;
+    const mainWidth = 1090;
+    let buttonTopPos=[];
+    let buttonLeftPos=[];
+    let frags = 360 / numberOfPlayers;
+    for (var i = 0; i < numberOfPlayers; i++) {
+        let theta = (frags / 180) * i * Math.PI;
+        let posx = Math.round(radiusX * (Math.cos(theta))) + 'px';
+        let posy = Math.round(radiusY * (Math.sin(theta))) + 'px';
+        buttonTopPos.push(((mainHeight / 2) - parseInt(posy.slice(0, -2))) + 'px');
+        buttonLeftPos.push(((mainWidth / 2) + parseInt(posx.slice(0, -2))) + 'px');
+    }
+    return({buttonLeftPos, buttonTopPos})
+}
+
 class ReplayTable extends React.Component {
 
     constructor(props){
@@ -126,11 +151,26 @@ class ReplayTable extends React.Component {
             players: shiftPlayers(props.hand.hero, props.hand.players),
             avatarTopPos: calcAvatarPositions(props.hand.players.length).avatarTopPos,
             avatarLeftPos: calcAvatarPositions(props.hand.players.length).avatarLeftPos,
+            dealerPositions: calcDealerButtonPositions(props.hand.players.length)
           }
     }
 
-    isDealer(playername){
-        return (this.props.hand.button === playername);
+    getDealerSeat(){
+        console.log(this.state.players)
+        for(var i =0; i<this.state.players.length; i++){
+            console.log("button: " + this.props.hand.button.valueOf())
+            console.log(this.state.players[i].name.valueOf())
+            if(this.props.hand.button.valueOf()===this.state.players[i].name.valueOf()) {
+                console.log("dealer: " + this.state.players[i].seat)
+                return this.state.players[i].seat
+            }
+        }
+    }
+
+    getDealerPosition(seat){
+        let leftPos = this.state.dealerPositions.buttonLeftPos[seat]
+        let topPos = this.state.dealerPositions.buttonTopPos[seat]
+        return {leftPos, topPos};
     }
 
     getAvatarLeftPostition(seat){
@@ -144,6 +184,15 @@ class ReplayTable extends React.Component {
     render(){
         const { classes } = this.props;
         const hasPot = this.state.pot > 0;
+        /*<DealerButton position={this.getDealerPosition(0)}  />
+        <DealerButton position={this.getDealerPosition(1)}  />
+        <DealerButton position={this.getDealerPosition(2)}  />
+        <DealerButton position={this.getDealerPosition(3)}  />
+        <DealerButton position={this.getDealerPosition(4)}  />
+        <DealerButton position={this.getDealerPosition(5)}  />
+        <DealerButton position={this.getDealerPosition(6)}  />
+        <DealerButton position={this.getDealerPosition(7)}  />
+        <DealerButton position={this.getDealerPosition(8)}  />*/
         return(
             <Box className={classes.replayTableRoot} margin={5, 1} padding={3} >
                 <Typography className={classes.handID} variant="h6" gutterBottom component="div">{this.state.hand.id}</Typography>
@@ -153,9 +202,14 @@ class ReplayTable extends React.Component {
                             <Box className={classes.avatarWrapper} >
                                 {Object.values(this.state.players).map((player, index) => (
                                     <PlayerAvatar id={player.seat} player={player} tablePos={index} 
-                                    leftPos={this.getAvatarLeftPostition(index)} topPos={this.getAvatarTopPostition(index)} isDealer={this.isDealer(player.name)} />
+                                    leftPos={this.getAvatarLeftPostition(index)} topPos={this.getAvatarTopPostition(index)} />
+                                    
                                 ))}
-                            </Box>    
+                            </Box>
+                            <Box className={classes.dealerButtonWrapper} > 
+                                <DealerButton position={this.getDealerPosition(this.getDealerSeat())} />
+                            </Box>   
+                            
                             <CommunityCards board={this.state.hand.board} />
                             { hasPot ? <Pot potSize={this.state.pot} /> : <></> }
                             <Box><img src={tableBackgoundFont} alt="The Poker Bro" className={classes.tablebackgroundfont} /></Box>
