@@ -40,10 +40,10 @@ const ChipWrapper = (props) => {
     return (
         <Box className={classes.chipWrapper}>
             {showDealerButtonLeft ? <img src={ButtonImage} alt="Button" className={classes.dealerButton}/> : <></> }
-            <Box className={classes.betwrapper}>
+            {props.betSize>0 ? <Box className={classes.betwrapper}>
                 <img src={BetImage} alt="Bet" className={classes.betImage} />
                 <Typography className={classes.betSize}>{props.betSize}</Typography>
-            </Box>
+            </Box> : <></>}
             {showDealerButtonRight ? <img src={ButtonImage} alt="Button" className={classes.dealerButton}/> : <></> }
         </Box>
     )

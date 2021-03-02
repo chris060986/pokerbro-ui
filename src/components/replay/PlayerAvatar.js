@@ -2,7 +2,6 @@ import { Avatar, Box, Container, Divider, Paper, Typography } from '@material-ui
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CardIcon from '../cards/CardIcon';
-import dealerButton from './images/dealer.png';
 
 const useStyles = makeStyles((theme, props) => ({
     small: {
@@ -19,8 +18,8 @@ const useStyles = makeStyles((theme, props) => ({
       },
     seatbox: {
         position: "absolute",
-        left: props => props.leftPos,
-        top: props => props.topPos,
+        left: props => props.cssPosition.avatarLeftPos,
+        top: props => props.cssPosition.avatarTopPos,
     },  
     avatarPaper:{
         position: "absolute",
@@ -76,7 +75,6 @@ const PlayerAvatar = (props) => {
             <Box className={classes.seatbox} >
                 <div className="avatar-cards">
                 {card1} {card2}
-                {props.isDealer ? <img src={dealerButton} alt="Dealer" className={classes.dealerButton} /> : <></> }
                 </div>
                 <Paper className={classes.avatarPaper} elevation={3} >
                     <Avatar className={classes.large}>{props.player.name.charAt(0)}</Avatar>

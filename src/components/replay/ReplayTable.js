@@ -138,17 +138,15 @@ class ReplayTable extends React.Component {
             collapsed: false,
             handBackup: props.hand,
             hand: props.hand,
-            pot: 5,
+            pot: 0,
             players: shiftPlayers(props.hand.hero, props.hand.players),
-            avatarTopPos: calcAvatarPositions(props.hand.players.length).avatarTopPos,
-            avatarLeftPos: calcAvatarPositions(props.hand.players.length).avatarLeftPos,
+            avatarPositions: calcAvatarPositions(props.hand.players.length),
             betPositions: calcBetPositions(props.hand.players.length)
           }
     }
 
     isDealer(playerName){
-        return true
-        //return (this.state.hand.button.valueOf()===playerName.valueOf())
+        return (this.state.hand.button.valueOf()===playerName.valueOf())
     }
 
     getBetPosition(seat){
@@ -157,12 +155,10 @@ class ReplayTable extends React.Component {
        return {leftPos, topPos};
     }
 
-    getAvatarLeftPostition(seat){
-        return this.state.avatarLeftPos[seat]
-    }
-
-    getAvatarTopPostition(seat){
-        return this.state.avatarTopPos[seat]
+    getAvatarPosition(seat){
+        let avatarLeftPos = this.state.avatarPositions.avatarLeftPos[seat]
+        let avatarTopPos = this.state.avatarPositions.avatarTopPos[seat]
+        return {avatarLeftPos, avatarTopPos}
     }
 
     render(){
@@ -177,14 +173,13 @@ class ReplayTable extends React.Component {
                         <Paper className={classes.tableBackground} elevation={3} >
                             <Box className={classes.avatarWrapper} >
                                 {Object.values(this.state.players).map((player, index) => (
-                                    <PlayerAvatar id={player.seat} player={player} tablePos={index} 
-                                    leftPos={this.getAvatarLeftPostition(index)} topPos={this.getAvatarTopPostition(index)} />
+                                    <PlayerAvatar id={player.seat} player={player} tablePos={index} cssPosition={this.getAvatarPosition(index)} />
                                 ))}
                             </Box>
                             
                             <Box className={classes.chipButtonWrapper} > 
                                 {Object.values(this.state.players).map((player, index) => (
-                                    <ChipWrapper id={player.seat} position={this.getBetPosition(index)} betSize="5" isDealer={this.isDealer(player.name)} />
+                                    <ChipWrapper id={player.seat} position={this.getBetPosition(index)} betSize="0" isDealer={this.isDealer(player.name)} />
                                 ))}
                             </Box>
                             <CommunityCards board={this.state.hand.board} />
