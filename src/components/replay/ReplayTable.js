@@ -11,6 +11,7 @@ import ChipWrapper from "./ChipWrapper";
 import Pot from "./Pot";
 import tableBackgoundFont from './images/pokerbroHeadline.png'
 
+
 const useStyles = theme => ({
    
      handID: {
@@ -130,19 +131,59 @@ function calcBetPositions(numberOfPlayers){
     return({betLeftPos, betTopPos})
 }
 
+const Streets = {
+    PREFLOP: -1,
+    FLOP: 3,
+    TURN: 4,
+    RIVER: 5,
+    SHOWDOWN: 6
+}
+
 class ReplayTable extends React.Component {
 
     constructor(props){
         super(props)
         this.state = {
             collapsed: false,
-            handBackup: props.hand,
             hand: props.hand,
-            pot: 0,
             players: shiftPlayers(props.hand.hero, props.hand.players),
             avatarPositions: calcAvatarPositions(props.hand.players.length),
-            betPositions: calcBetPositions(props.hand.players.length)
+            betPositions: calcBetPositions(props.hand.players.length),
+
+            pot: 0,
+            street: Streets.PREFLOP
           }
+    }
+
+    resetHand(){
+        this.setState({
+            pot: 0,
+            street: Streets.PREFLOP
+        })
+    }
+
+    setToFlop = () => {
+        this.setState({
+            street: Streets.FLOP
+        })
+    }
+
+    setToTurn = () => {
+        this.setState({
+            street: Streets.TURN
+        })
+    }
+
+    setToRiver = () => {
+        this.setState(state => ({
+            street: Streets.RIVER
+        }))
+    }
+
+    setToShowDown = () => {
+        this.setState({
+            street: Streets.SHOWDOWN
+        })
     }
 
     isDealer(playerName){
@@ -182,7 +223,7 @@ class ReplayTable extends React.Component {
                                     <ChipWrapper id={player.seat} position={this.getBetPosition(index)} betSize="0" isDealer={this.isDealer(player.name)} />
                                 ))}
                             </Box>
-                            <CommunityCards board={this.state.hand.board} />
+                            <CommunityCards street={this.state.street} board={this.state.hand.board} />
                             { hasPot ? <Pot potSize={this.state.pot} /> : <></> }
                             <Box><img src={tableBackgoundFont} alt="The Poker Bro" className={classes.tablebackgroundfont} /></Box>
                         </Paper>
@@ -210,10 +251,10 @@ class ReplayTable extends React.Component {
                                 <IconButton color="primary"><MdIcons.MdSkipNext size="1.5em"></MdIcons.MdSkipNext></IconButton>
                             </Box>
                             <Box className={classes.tablestateButtonWrapper}>
-                                <Button variant="contained" size="small" color="secondary" margin={2}>Flop</Button>
-                                <Button variant="contained" size="small" color="secondary" margin={2}>Turn</Button>
-                                <Button variant="contained" size="small" color="secondary" margin={2}>River</Button>
-                                <Button variant="contained" size="small" color="secondary" margin={2}>Showdown</Button>
+                                <Button variant="contained" size="small" color="secondary" margin={2} onClick={this.setToFlop}>Flop</Button>
+                                <Button variant="contained" size="small" color="secondary" margin={2} onClick={this.setToTurn}>Turn</Button>
+                                <Button variant="contained" size="small" color="secondary" margin={2} onClick={this.setToRiver}>River</Button>
+                                <Button variant="contained" size="small" color="secondary" margin={2} onClick={this.setToShowDown}>Showdown</Button>
                             </Box>
                         </Paper>
                     </Box>

@@ -9,21 +9,19 @@ const useStyles = makeStyles((theme) => ({
         position: "relative",
         left: "380px",
         top: "240px"
-    },
-    cardIconTest: {
-        backgroundColor: "black",
     }
 }));
 
 const CommunityCards = (props) => {
     const classes = useStyles();
+    console.log(props.street)
     if(props.board) {
         return (
             <>
                 <Box className={classes.communityCardWrapper}>
                     <div className="community-cards">
-                        {Object.values(props.board).map(card => (
-                            <CardIcon suit={card.suit} rank={card.rank} />
+                        {Object.values(props.board).map((card, index) => (
+                            index < props.street ? <CardIcon suit={card.suit} rank={card.rank} /> : <></>
                         ))}
                     </div>
                 </Box>
