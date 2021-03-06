@@ -145,45 +145,33 @@ class ReplayTable extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            collapsed: false,
             hand: props.hand,
             players: shiftPlayers(props.hand.hero, props.hand.players),
-            avatarPositions: calcAvatarPositions(props.hand.players.length),
-            betPositions: calcBetPositions(props.hand.players.length),
-
             pot: 0,
-            street: Streets.PREFLOP
+            street: Streets.PREFLOP,
+            preflopActionPointer: 0,
+            flopActionPointer: 0,
+            turnActionsPointer: 0,
+            riverActionsPointer: 0,
           }
+          this.avatarPositions = calcAvatarPositions(this.props.hand.players.length)
+          this.betPositions = calcBetPositions(this.props.hand.players.length)
+          console.log("state:")
+          console.log(this.state);
     }
 
-    resetHand(){
+    resetHand = (props) =>{
+        let shiftedPlayers = shiftPlayers(this.props.hand.hero, this.props.hand.players)
         this.setState({
             pot: 0,
-            street: Streets.PREFLOP
+            street: Streets.PREFLOP,
+            players: shiftedPlayers
         })
     }
 
-    setToFlop = () => {
+    setStreetTo = (newStreet) => {
         this.setState({
-            street: Streets.FLOP
-        })
-    }
-
-    setToTurn = () => {
-        this.setState({
-            street: Streets.TURN
-        })
-    }
-
-    setToRiver = () => {
-        this.setState(state => ({
-            street: Streets.RIVER
-        }))
-    }
-
-    setToShowDown = () => {
-        this.setState({
-            street: Streets.SHOWDOWN
+            street: newStreet
         })
     }
 
@@ -192,14 +180,14 @@ class ReplayTable extends React.Component {
     }
 
     getBetPosition(seat){
-       let leftPos = this.state.betPositions.betLeftPos[seat]
-       let topPos = this.state.betPositions.betTopPos[seat]
+       let leftPos = this.betPositions.betLeftPos[seat]
+       let topPos = this.betPositions.betTopPos[seat]
        return {leftPos, topPos};
     }
 
     getAvatarPosition(seat){
-        let avatarLeftPos = this.state.avatarPositions.avatarLeftPos[seat]
-        let avatarTopPos = this.state.avatarPositions.avatarTopPos[seat]
+        let avatarLeftPos = this.avatarPositions.avatarLeftPos[seat]
+        let avatarTopPos = this.avatarPositions.avatarTopPos[seat]
         return {avatarLeftPos, avatarTopPos}
     }
 
@@ -246,16 +234,16 @@ class ReplayTable extends React.Component {
                     <Box className={classes.tableActions} >
                         <Paper elevation={3}>
                             <Box className={classes.tableActionButtonWrapper}>
-                                <IconButton color="primary" ><MdIcons.MdFastRewind size="1.5em" ></MdIcons.MdFastRewind></IconButton>
-                                <IconButton color="secondary" ><RiIcons.RiRestartFill size="2em"></RiIcons.RiRestartFill></IconButton>
+                                <IconButton color="primary"><MdIcons.MdFastRewind size="1.5em" ></MdIcons.MdFastRewind></IconButton>
+                                <IconButton color="secondary" onClick={() => this.resetHand()} ><RiIcons.RiRestartFill size="2em"></RiIcons.RiRestartFill></IconButton>
                                 <IconButton color="primary"><MdIcons.MdFastForward size="1.5em" ></MdIcons.MdFastForward></IconButton>
                                 <IconButton color="primary"><MdIcons.MdSkipNext size="1.5em"></MdIcons.MdSkipNext></IconButton>
                             </Box>
                             <Box className={classes.tablestateButtonWrapper}>
-                                <Button variant="contained" size="small" color="secondary" margin={2} onClick={this.setToFlop}>Flop</Button>
-                                <Button variant="contained" size="small" color="secondary" margin={2} onClick={this.setToTurn}>Turn</Button>
-                                <Button variant="contained" size="small" color="secondary" margin={2} onClick={this.setToRiver}>River</Button>
-                                <Button variant="contained" size="small" color="secondary" margin={2} onClick={this.setToShowDown}>Showdown</Button>
+                                <Button variant="contained" size="small" color="secondary" margin={2} onClick={() => this.setStreetTo(Streets.FLOP)}>Flop</Button>
+                                <Button variant="contained" size="small" color="secondary" margin={2} onClick={() => this.setStreetTo(Streets.TURN)}>Turn</Button>
+                                <Button variant="contained" size="small" color="secondary" margin={2} onClick={() => this.setStreetTo(Streets.RIVER)}>River</Button>
+                                <Button variant="contained" size="small" color="secondary" margin={2} onClick={() => this.setStreetTo(Streets.SHOWDOWN)}>Showdown</Button>
                             </Box>
                         </Paper>
                     </Box>
