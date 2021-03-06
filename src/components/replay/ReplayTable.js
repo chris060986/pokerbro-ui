@@ -154,7 +154,6 @@ class ReplayTable extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            hand: props.hand,
             players: initPlayerStates(shiftPlayers(props.hand.hero, props.hand.players)),
             pot: 0,
             street: Streets.PREFLOP,
@@ -168,7 +167,7 @@ class ReplayTable extends React.Component {
     }
  
     resetHand = (props) =>{
-        let shiftedPlayers = shiftPlayers(this.props.hand.hero, this.props.hand.players)
+        let shiftedPlayers = initPlayerStates(shiftPlayers(this.props.hand.hero, this.props.hand.players))
         this.setState({
             pot: 0,
             street: Streets.PREFLOP,
@@ -183,7 +182,7 @@ class ReplayTable extends React.Component {
     }
 
     isDealer(playerName){
-        return (this.state.hand.button.valueOf()===playerName.valueOf())
+        return (this.props.hand.button.valueOf()===playerName.valueOf())
     }
 
     getBetPosition(seat){
@@ -204,7 +203,7 @@ class ReplayTable extends React.Component {
 
         return(
             <Box className={classes.replayTableRoot} margin={5, 1} padding={3} >
-                <Typography className={classes.handID} variant="h6" gutterBottom component="div">{this.state.hand.id}</Typography>
+                <Typography className={classes.handID} variant="h6" gutterBottom component="div">{this.props.hand.id}</Typography>
                 <Box className={classes.tableWrapper}>
                     <Box className={classes.pokerTable} >
                         <Paper className={classes.tableBackground} elevation={3} >
@@ -219,7 +218,7 @@ class ReplayTable extends React.Component {
                                     <ChipWrapper id={player.seat} position={this.getBetPosition(index)} betSize="0" isDealer={this.isDealer(player.name)} />
                                 ))}
                             </Box>
-                            <CommunityCards street={this.state.street} board={this.state.hand.board} />
+                            <CommunityCards street={this.state.street} board={this.props.hand.board} />
                             { hasPot ? <Pot potSize={this.state.pot} /> : <></> }
                             <Box><img src={tableBackgoundFont} alt="The Poker Bro" className={classes.tablebackgroundfont} /></Box>
                         </Paper>
