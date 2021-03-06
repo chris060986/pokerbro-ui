@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
 
 const CommunityCards = (props) => {
     const classes = useStyles();
-    console.log(props.street)
     if(props.board) {
         return (
             <>
