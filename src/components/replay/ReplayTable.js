@@ -104,6 +104,15 @@ function shiftPlayers(hero, playersList){
     return playerListCopy
 }
 
+function initPlayerStates(playerlist) {
+    let tempPlayers = playerlist.slice();
+    for(var i =0; i<tempPlayers.length; i++){
+        tempPlayers[i].folded=false;
+        tempPlayers[i].amountSet=0;
+    }
+    return tempPlayers
+}
+
 function calcPositionOnEllipse(numberOfItems, radiusX, radiusY, mainHeight, mainWidth, thetaOffset){
     let topPos=[];
     let leftPos=[];
@@ -146,7 +155,7 @@ class ReplayTable extends React.Component {
         super(props)
         this.state = {
             hand: props.hand,
-            players: shiftPlayers(props.hand.hero, props.hand.players),
+            players: initPlayerStates(shiftPlayers(props.hand.hero, props.hand.players)),
             pot: 0,
             street: Streets.PREFLOP,
             preflopActionPointer: 0,
@@ -156,10 +165,8 @@ class ReplayTable extends React.Component {
           }
           this.avatarPositions = calcAvatarPositions(this.props.hand.players.length)
           this.betPositions = calcBetPositions(this.props.hand.players.length)
-          console.log("state:")
-          console.log(this.state);
     }
-
+ 
     resetHand = (props) =>{
         let shiftedPlayers = shiftPlayers(this.props.hand.hero, this.props.hand.players)
         this.setState({
