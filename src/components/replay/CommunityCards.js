@@ -20,7 +20,7 @@ const CommunityCards = (props) => {
                 <Box className={classes.communityCardWrapper}>
                     <div className="community-cards">
                         {Object.values(props.board).map((card, index) => (
-                            index < props.street ? <CardIcon suit={card.suit} rank={card.rank} /> : <></>
+                            index < props.street ? <CardIcon id={card.rank+card.suit} suit={card.suit} rank={card.rank} /> : <></>
                         ))}
                     </div>
                 </Box>
