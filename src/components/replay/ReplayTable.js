@@ -95,12 +95,13 @@ const useStyles = theme => ({
     });
 
 function shiftPlayers(hero, playersList){
-    const maxPlayers = playersList.length > 6 ? playersList.length-1 : playersList.length
-    while(hero.valueOf()!=playersList[maxPlayers-1].name.valueOf()) {
-        var removed = playersList.shift()
-        playersList.push(removed)
+    let playerListCopy = JSON.parse(JSON.stringify(playersList));
+    const maxPlayers = playerListCopy.length > 6 ? playerListCopy.length-1 : playerListCopy.length
+    while(hero.valueOf()!==playerListCopy[maxPlayers-1].name.valueOf()) {
+        var removed = playerListCopy.shift()
+        playerListCopy.push(removed)
     }
-    return playersList
+    return playerListCopy
 }
 
 function calcPositionOnEllipse(numberOfItems, radiusX, radiusY, mainHeight, mainWidth, thetaOffset){
