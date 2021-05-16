@@ -12,6 +12,10 @@
     width: 5em;
 }
 
+.folded{
+    opacity: 50%;
+}
+
 .avatar-cards .card-icon-wrapper {
     margin-left: 45px;
     margin-right: -70px;

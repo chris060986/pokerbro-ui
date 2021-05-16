@@ -13,8 +13,8 @@ class HandHistoryTable extends React.Component {
             <TableHead color="primary" style={{ backgroundColor: "#e0e0e0"}}>
               <TableRow>
                 <TableCell />
-                <TableCell>Date</TableCell>
                 <TableCell>ID</TableCell>
+                <TableCell>Date</TableCell>
                 <TableCell>Stake</TableCell>
                 <TableCell>Position</TableCell>
                 <TableCell>Cards</TableCell>

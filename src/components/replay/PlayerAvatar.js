@@ -73,7 +73,7 @@ const PlayerAvatar = (props) => {
     return (
         <>
             <Box className={classes.seatbox} >
-                <div className="avatar-cards">
+                <div className={`avatar-cards ${props.isFolded ? "folded" : ""}`}>
                 {card1} {card2}
                 </div>
                 <Paper className={classes.avatarPaper} elevation={3} >

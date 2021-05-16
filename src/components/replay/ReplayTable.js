@@ -209,13 +209,13 @@ class ReplayTable extends React.Component {
                         <Paper className={classes.tableBackground} elevation={3} >
                             <Box className={classes.avatarWrapper} >
                                 {Object.values(this.state.players).map((player, index) => (
-                                    <PlayerAvatar id={player.seat} player={player} tablePos={index} cssPosition={this.getAvatarPosition(index)} />
+                                    <PlayerAvatar id={player.seat} player={player} tablePos={index} isFolded={player.folded} cssPosition={this.getAvatarPosition(index)} />
                                 ))}
                             </Box>
                             
                             <Box className={classes.chipButtonWrapper} > 
                                 {Object.values(this.state.players).map((player, index) => (
-                                    <ChipWrapper id={player.seat} position={this.getBetPosition(index)} betSize="0" isDealer={this.isDealer(player.name)} />
+                                    <ChipWrapper id={player.seat} position={this.getBetPosition(index)} betSize={player.amountSet} isDealer={this.isDealer(player.name)} />
                                 ))}
                             </Box>
                             <CommunityCards street={this.state.street} board={this.props.hand.board} />
